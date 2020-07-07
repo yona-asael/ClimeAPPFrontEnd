@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+;
 
 @Injectable({
   providedIn: 'root'
 })
-export class RecipeService {
-  private API = environment.API_ENDPOINT + 'recipes';
+export class PatientService {
+  private API = environment.API_ENDPOINT + 'patients';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -60,5 +61,4 @@ export class RecipeService {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
     return throwError(errorMessage);
-  }
-}
+  }}

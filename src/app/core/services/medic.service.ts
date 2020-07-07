@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { signUp } from '../../../../../Documents/web/BackEnd/server/controllers/auth.controller';
-
+;
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-
-  private API = environment.API_ENDPOINT + 'auth';
+export class MedicService {
+  private API = environment.API_ENDPOINT + 'medics';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -23,22 +21,34 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  public signUp(id: Number): Observable<any> {
-    return this.http.get<any>(this.API + `/login`, this.httpOptions).pipe(
+  public findOne(id: Number): Observable<any> {
+    return this.http.get<any>(this.API + `/${id}`, this.httpOptions).pipe(
       retry(1),
       catchError(this.handleError)
     );
 
   }
-  public singIn(): Observable<any[]> {
-    return this.http.get<any[]>(this.API + '/register', this.httpOptions).pipe(
+  public getALL(): Observable<any[]> {
+    return this.http.get<any[]>(this.API + '/', this.httpOptions).pipe(
       retry(1),
       catchError(this.handleError),
     );
   }
 
-  public profile(user: any): Observable<any> {
-    return this.http.get<any[]>(this.API + '/profile', this.httpOptions).pipe(
+  public create(user: any): Observable<any> {
+    return this.http.post<any>(this.API, JSON.stringify(user), this.httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public update(user: any): Observable<any> {
+    return this.http.put<any>(this.API + `/${user.id}`, JSON.stringify(user), this.httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public delete(id: number): Observable<boolean> {
+    return this.http.delete<boolean>(this.API + `/${id}`, this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
@@ -52,5 +62,4 @@ export class AuthService {
     }
     return throwError(errorMessage);
   }
-
 }
