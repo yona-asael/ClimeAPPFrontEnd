@@ -8,7 +8,6 @@ export class personModel {
     address: String;
     cellphone: String;
     job: String;
-    //rol: rols;
 }
 
 
