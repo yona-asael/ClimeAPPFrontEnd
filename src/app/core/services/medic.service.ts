@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { MedicModel } from '../models/medic.model';
 ;
 
 @Injectable({
@@ -21,28 +22,27 @@ export class MedicService {
     private http: HttpClient
   ) { }
 
-  public findOne(id: Number): Observable<any> {
-    return this.http.get<any>(this.API + `/${id}`, this.httpOptions).pipe(
+  public findOne(id: Number): Observable<MedicModel> {
+    return this.http.get<MedicModel>(this.API + `/${id}`, this.httpOptions).pipe(
       retry(1),
       catchError(this.handleError)
     );
-
   }
-  public getALL(): Observable<any[]> {
-    return this.http.get<any[]>(this.API + '/', this.httpOptions).pipe(
+  public getALL(): Observable<MedicModel[]> {
+    return this.http.get<MedicModel[]>(this.API + '/', this.httpOptions).pipe(
       retry(1),
       catchError(this.handleError),
     );
   }
 
-  public create(user: any): Observable<any> {
-    return this.http.post<any>(this.API, JSON.stringify(user), this.httpOptions).pipe(
+  public create(user: MedicModel): Observable<MedicModel> {
+    return this.http.post<MedicModel>(this.API, JSON.stringify(user), this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
 
-  public update(user: any): Observable<any> {
-    return this.http.put<any>(this.API + `/${user.id}`, JSON.stringify(user), this.httpOptions).pipe(
+  public update(user: MedicModel): Observable<MedicModel> {
+    return this.http.put<MedicModel>(this.API + `/${user._id}`, JSON.stringify(user), this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }

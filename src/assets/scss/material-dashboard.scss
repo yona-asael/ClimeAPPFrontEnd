@@ -57,3 +57,102 @@
  @import "core/responsive";
 
 @import "core/angular-modal.scss";
+
+
+.mat-table__wrapper:not(.mat-table-fixed) {
+    width: 100%;
+    overflow-x: auto;
+  
+    mat-cell,
+    mat-header-cell {
+      min-height: 100%;
+    }
+  }
+  
+  .mat-table__wrapper .mat-table:not(.mat-table-fixed) {
+    min-width: 1000px;
+    width: 100%;
+  }
+  
+  .mat-table__wrapper--dashboard .mat-table {
+    min-width: 600px !important;
+  }
+  
+  .mat-table__wrapper .mat-table .email-cell {
+    word-wrap: normal;
+    width: 180px;
+    flex: auto;
+  }
+
+  .mat-table__wrapper--sub .mat-table {
+    min-width: 400px;
+  
+    .mat-cell:last-child {
+      flex: 0 0 100px;
+    }
+  
+    .mat-header-cell:last-child {
+      flex: 0 0 100px;
+    }
+  }
+  .ml-auto {
+    margin-left: auto;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .mat-column-checkbox {
+    flex: 0 0 68px;
+  }
+
+  
+  .mat-column-actions {
+    flex: 0 0 160px;
+  }
+  
+  .mat-table__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  .mat-column-vinCode {
+    flex: 0 0 170px;
+  }
+
+  .example-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    min-width: 300px;
+  }
+  
+  .mat-table {
+    overflow: auto;
+//     max-height: 500px;
+  }
+  
+  .mobile-label {
+    display: none;
+  }
+  
+  @media(max-width: 600px) {
+    .mobile-label {
+      width: 80px;
+      display: inline-block;
+          font-weight: bold;
+    }
+  
+    .mat-header-row {
+      display: none;
+    }
+  
+    .mat-row { 
+      flex-direction: column;
+      align-items: start;
+      padding: 8px 24px;
+    }
+  }
+  

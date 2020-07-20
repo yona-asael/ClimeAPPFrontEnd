@@ -12,6 +12,31 @@
                             <mat-tab-group>
                                 <mat-tab>
                                     <ng-template mat-tab-label>
+                                        <mat-icon class="example-tab-icon">list</mat-icon>
+                                        Personal
+                                    </ng-template>
+                                    <div class="row">
+                                        <div class="col-10">
+                                            <h3>Lista de Personal</h3>
+                                        </div>
+                                        <div class="col-2">
+                                            <br>
+                                            <div class="d-flex align-items-end">
+                                                <button mat-raised-button color="primary"
+                                                    [routerLink]="[baseroute,'personal', 'create']">Agregar
+                                                    Personal</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <mat-divider></mat-divider>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <app-personal-list></app-personal-list>
+                                        </div>
+                                    </div>
+                                </mat-tab>
+                                <mat-tab>
+                                    <ng-template mat-tab-label>
                                         <mat-icon class="example-tab-icon">healing</mat-icon>
                                         Medicos
                                     </ng-template>
@@ -26,25 +51,6 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <app-medic-list></app-medic-list>
-                                        </div>
-                                    </div>
-                                </mat-tab>
-                                <mat-tab>
-                                    <ng-template mat-tab-label>
-                                        <mat-icon class="example-tab-icon">list</mat-icon>
-                                        Tipos de Servicios
-                                    </ng-template>
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <h3>Lista de Servicios</h3>
-                                        </div>
-                                        <div class="col-4">
-                                        </div>
-                                    </div>
-                                    <mat-divider></mat-divider>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <app-services-list></app-services-list>
                                         </div>
                                     </div>
                                 </mat-tab>

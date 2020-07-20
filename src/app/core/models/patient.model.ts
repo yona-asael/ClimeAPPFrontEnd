@@ -1,22 +1,11 @@
-//patient
-
-export class parientModel {
-    public name: String;
-    public lastname: String;
+export class ParientModel {
+    public name: string;
+    public lastname: string;
     public Date: Date;
-    public address: String;
-    public cellphone: Number;
-    public NSS: String;
-    public SEX: String;
+    public address: string;
+    public cellphone: number;
+    public NSS: string;
+    public SEX: string;
 }
 
 
-export interface parientInterface{
-    name: String,
-    lastname: String,
-    Date: Date,
-    address: String,
-    cellphone: Number,
-    NSS: String,
-    SEX: String
-}

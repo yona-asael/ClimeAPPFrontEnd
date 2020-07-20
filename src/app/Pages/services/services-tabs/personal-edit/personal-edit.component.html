@@ -1,0 +1,66 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <div id="typography">
+                    <div class="card-title">
+                        <div class="row">
+                            <div class="col-8">
+                                <h2>Agregar Personal</h2>
+                            </div>
+                            <div class="col-2">
+                                <a [routerLink]="['/services']"  mat-raised-button
+                                    class="mat-icon-inline">
+                                    <mat-icon>arrow_back</mat-icon>
+                                    Regresar
+                                </a>
+                            </div>
+                            <div class="col-2">
+                                <button mat-raised-button color="primary" *ngIf="!readOnly" (click)="saveChanges()">
+                                    <mat-icon>save</mat-icon>
+                                    Guardar Cambios
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form [formGroup]="personForm">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input formControlName="name" matInput placeholder="Escriba el nombre" required>
+                                <mat-hint align="start">Escriba el <strong>Nombre</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-2">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input matInput formControlName="lastname" placeholder="Escriba los apellidos" required>
+                                <mat-hint align="start">Escriba los <strong>apellidos</strong>
+                                </mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-2">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input matInput formControlName="address" placeholder="Escriba la direccion" required>
+                                <mat-hint align="start">Escriba la <strong>Direccion</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-2">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input matInput formControlName="cellphone" placeholder="Escriba el telefono" required>
+                                <mat-hint align="start">Escriba el <strong>telefono</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-2">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input matInput formControlName="job" placeholder="Escriba la trabajo" required>
+                                <mat-hint align="start">Escriba el <strong>trabajo</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./services-tabs.component.css']
 })
 export class ServicesTabsComponent implements OnInit {
-
+  baseroute = '/services';
   constructor() { }
 
   ngOnInit(): void {

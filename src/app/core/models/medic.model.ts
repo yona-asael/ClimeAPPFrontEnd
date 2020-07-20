@@ -1,16 +1,7 @@
-//Medic
-
-export class medicModel {
-    public University: String;
-    public Grade: String;
-    public CedP: String;
-    public person_id: String;
-}
-
-
-export interface medicInterface{
-    University: String,
-    Grade: String,
-    CedP: String,
-    person_id: String
+export class MedicModel {
+    public _id: number
+    public University: string;
+    public Grade: string;
+    public CedP: string;
+    public person_id: string;
 }

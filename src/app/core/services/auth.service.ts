@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { UserModel } from '../models/user.model';
 
 
 @Injectable({
@@ -22,22 +23,22 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  public signUp(id: Number): Observable<any> {
-    return this.http.get<any>(this.API + `/login`, this.httpOptions).pipe(
+  public signUp(user: UserModel): Observable<UserModel> {
+    return this.http.post<UserModel>(this.API + `/login`, user, this.httpOptions).pipe(
       retry(1),
       catchError(this.handleError)
     );
 
   }
-  public singIn(): Observable<any[]> {
-    return this.http.get<any[]>(this.API + '/register', this.httpOptions).pipe(
+  public singIn(user: UserModel): Observable<UserModel> {
+    return this.http.post<UserModel>(this.API + '/register', user, this.httpOptions).pipe(
       retry(1),
       catchError(this.handleError),
     );
   }
 
-  public profile(user: any): Observable<any> {
-    return this.http.get<any[]>(this.API + '/profile', this.httpOptions).pipe(
+  public profile(user: UserModel): Observable<UserModel> {
+    return this.http.get<UserModel>(this.API + '/profile', this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }

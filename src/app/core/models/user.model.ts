@@ -1,17 +1,12 @@
-//user
-
-export class userModel {
+export class UserModel {
     public username: string;
     public password: string;
     public createdAt: Date;
-    
-}
 
+    constructor() {
 
-export interface userInterface{
-    username: string,
-    password: string,
-    createdAt: Date
+    }
+
 }
 
 

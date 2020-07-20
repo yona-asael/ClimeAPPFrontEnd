@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ServicesTabsComponent } from './services-tabs/services-tabs.component';
+import { PersonalEditComponent } from './services-tabs/personal-edit/personal-edit.component';
+import { PersonResolver } from '../../core/resolvers/Personal.resolver';
 
 
 const routes: Routes = [
@@ -18,36 +20,36 @@ const routes: Routes = [
           title: 'Lista',
         },
       },
-      // {
-      //   path: 'create',
-      //   component: HistoryEditComponent,
-      //   // resolve: { client: ClientResolver },
-      //   data: {
-      //     title: 'Crear',
-      //     readOnly: false,
-      //     update: false,
-      //   },
-      // },
-      // {
-      //   path: 'edit/:id',
-      //   component: HistoryEditComponent,
-      //   // resolve: { client: ClientResolver },
-      //   data: {
-      //     title: 'Edit',
-      //     readOnly: false,
-      //     update: true,
-      //   },
-      // },
-      // {
-      //   path: 'ver/:id',
-      //   component: HistoryEditComponent,
-      //   // resolve: { client: ClientResolver },
-      //   data: {
-      //     title: 'Crear',
-      //     readOnly: true,
-      //     update: false,
-      //   },
-      // }
+      {
+        path: 'personal/create',
+        component: PersonalEditComponent,
+        resolve: { person: PersonResolver },
+        data: {
+          title: 'Crear',
+          readOnly: false,
+          update: false,
+        },
+      },
+      {
+        path: 'personal/edit/:id',
+        component: PersonalEditComponent,
+        resolve: { person: PersonResolver },
+        data: {
+          title: 'Edit',
+          readOnly: false,
+          update: true,
+        },
+      },
+      {
+        path: 'personal/see/:id',
+        component: PersonalEditComponent,
+        resolve: { person: PersonResolver },
+        data: {
+          title: 'Crear',
+          readOnly: true,
+          update: false,
+        },
+      }
     ]
   }
 ];
