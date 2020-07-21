@@ -1,6 +1,7 @@
+import { MedicModel } from './medic.model';
 
 export class PaginationModel {
-    data: PaginationModel[] | null;
+    data: PaginationModel[] | MedicModel[] |null ;
     pagination: Pagination
 }
 

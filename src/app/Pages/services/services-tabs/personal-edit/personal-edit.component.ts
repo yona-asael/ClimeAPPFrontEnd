@@ -31,7 +31,7 @@ export class PersonalEditComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    const personModel = <PersonModel>this.activatedRoute.snapshot.data[ResolverEnums.Person];
+    const personModel = <PersonModel>this.activatedRoute.snapshot.data['person'];
     if (personModel) {
       this.person = personModel;
     }
@@ -43,10 +43,10 @@ export class PersonalEditComponent implements OnInit, OnDestroy {
   createForm() {
     this.personForm = this.inputFB.group({
       name: [{ value: this.person.name, disabled: this.readOnly }, [Validators.required]],
-      lastname: [{ value: this.person.lastname, disabled: this.readOnly }, [Validators.required, Validators.maxLength(3)]],
+      lastname: [{ value: this.person.lastname, disabled: this.readOnly }, [Validators.required]],
       address: [{ value: this.person.address, disabled: this.readOnly }, [Validators.required]],
       cellphone: [{ value: this.person.cellphone, disabled: this.readOnly }, [Validators.required, Validators.pattern('^[0-9]*$')]],
-      job: [{ value: this.person.job, disabled: this.readOnly }, [Validators.required, Validators.pattern('^[0-9]*$')]],
+      job: [{ value: this.person.job, disabled: this.readOnly }, [Validators.required]],
     });
   }
 
@@ -60,10 +60,10 @@ export class PersonalEditComponent implements OnInit, OnDestroy {
 
   addPerson(): void {
     this.personService.create(this.getPerson).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
-    this._snackBar.open('Registro Personal Creado', 'Cerrar', {
-      duration: 2000,
-    });
-    this.router.navigate(['/services']);
+      this._snackBar.open('Registro Personal Creado', 'Cerrar', {
+        duration: 2000,
+      });
+      this.router.navigate(['/services']);
     });
   }
 

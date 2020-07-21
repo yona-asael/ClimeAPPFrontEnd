@@ -1,0 +1,72 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <div id="typography">
+                    <div class="card-title">
+                        <div class="row">
+                            <div class="col-8">
+                                <h2>Agregar Medico</h2>
+                            </div>
+                            <div class="col-2">
+                                <a [routerLink]="['/services']" mat-raised-button class="mat-icon-inline">
+                                    <mat-icon>arrow_back</mat-icon>
+                                    Regresar
+                                </a>
+                            </div>
+                            <div class="col-2">
+                                <button mat-raised-button color="primary" *ngIf="!readOnly" (click)="saveChanges()">
+                                    <mat-icon>save</mat-icon>
+                                    Guardar Cambios
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form [formGroup]="medicForm">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input formControlName="university" matInput placeholder="Escriba el Universidad" required>
+                                <mat-hint align="start">Escriba el <strong>Nombre</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-3">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input matInput formControlName="cedP" placeholder="Escriba los Cedula Profesional"
+                                    required>
+                                <mat-hint align="start">Escriba la <strong>Cedula</strong>
+                                </mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-3">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input matInput formControlName="grade" placeholder="Escriba el grado de estudios"
+                                    required>
+                                <mat-hint align="start">Escriba el <strong>Grado</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input matInput [matAutocomplete]="personSelect" formControlName="person"
+                                    placeholder="Escriba la persona" required>
+                                <mat-autocomplete #personSelect="matAutocomplete">
+                                    <ng-container *ngFor="let  person  of persons">
+                                        <mat-option value="{{person._id}}" (onSelectionChange)="onSelect($event)"
+                                            matTooltip="{{ person.name }} | {{ person.lastname }}">
+                                            {{ person.name }} {{ person.lastname }}
+                                        </mat-option>
+                                    </ng-container>
+                                </mat-autocomplete>
+                                <mat-hint align="start">Seleccione el <strong>proveedor</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

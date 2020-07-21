@@ -1,7 +1,9 @@
+import { PersonModel } from './person.model';
+
 export class MedicModel {
-    public _id: number
-    public University: string;
-    public Grade: string;
-    public CedP: string;
-    public person_id: string;
+    public _id: Number
+    public university: String;
+    public grade: String;
+    public cedP: String;
+    public person: String | PersonModel;
 }

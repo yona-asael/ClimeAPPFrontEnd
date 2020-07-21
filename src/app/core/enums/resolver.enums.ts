@@ -1,3 +1,6 @@
 export enum ResolverEnums {
-    Person = 'person'
+    Person = 'person',
+    Persons = 'persons',
+    Medic = 'medic',
+    Medics = 'medics'
 }

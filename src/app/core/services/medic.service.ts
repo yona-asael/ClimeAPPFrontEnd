@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { MedicModel } from '../models/medic.model';
+import { IMedic } from '../interface/Medic.interface';
+import { PaginationModel } from '../models/pagination.model';
 ;
 
 @Injectable({
@@ -22,7 +24,7 @@ export class MedicService {
     private http: HttpClient
   ) { }
 
-  public findOne(id: Number): Observable<MedicModel> {
+  public findOne(id: string): Observable<MedicModel> {
     return this.http.get<MedicModel>(this.API + `/${id}`, this.httpOptions).pipe(
       retry(1),
       catchError(this.handleError)
@@ -35,7 +37,16 @@ export class MedicService {
     );
   }
 
-  public create(user: MedicModel): Observable<MedicModel> {
+  public getList(limit: Number, page: Number): Observable<PaginationModel> {
+    const params = { ... this.httpOptions }
+    params.params = new HttpParams().set('limit', `${limit}`).set('page', `${page}`);
+    return this.http.get<PaginationModel>(this.API + '/', params).pipe(
+      retry(1),
+      catchError(this.handleError),
+    );
+  }
+
+  public create(user: IMedic): Observable<MedicModel> {
     return this.http.post<MedicModel>(this.API, JSON.stringify(user), this.httpOptions).pipe(
       catchError(this.handleError)
     );
@@ -47,7 +58,7 @@ export class MedicService {
     );
   }
 
-  public delete(id: number): Observable<boolean> {
+  public delete(id: String): Observable<boolean> {
     return this.http.delete<boolean>(this.API + `/${id}`, this.httpOptions).pipe(
       catchError(this.handleError)
     );

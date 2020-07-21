@@ -13,6 +13,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
 @NgModule({
     imports: [
         MatButtonModule,
@@ -28,7 +29,8 @@ import { MatTableModule } from '@angular/material/table';
         MatPaginatorModule,
         MatProgressBarModule,
         MatDialogModule,
-        MatTableModule
+        MatTableModule,
+        MatAutocompleteModule
     ],
     exports: [
         MatButtonModule,
@@ -44,7 +46,8 @@ import { MatTableModule } from '@angular/material/table';
         MatPaginatorModule,
         MatProgressBarModule,
         MatDialogModule,
-        MatTableModule
+        MatTableModule,
+        MatAutocompleteModule
     ]
 })
 export class MaterialModule { }

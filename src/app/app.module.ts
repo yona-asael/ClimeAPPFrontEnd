@@ -21,6 +21,7 @@ import {
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { PersonService } from './core/services/person.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MedicService } from './core/services/medic.service';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [
     PersonService,
+    MedicService
   ],
   bootstrap: [AppComponent]
 })

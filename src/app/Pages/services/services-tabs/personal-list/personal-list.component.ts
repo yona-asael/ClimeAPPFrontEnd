@@ -65,7 +65,7 @@ export class PersonalListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 
-  deleteClient(id: number) {
+  deleteClient(id: String) {
     const dialogRef = this.dialog.open(DeleteDialogComponent);
     dialogRef.afterClosed().pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
       if (result) {

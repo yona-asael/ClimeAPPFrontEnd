@@ -10,11 +10,15 @@ export class PersonResolver implements Resolve<PersonModel> {
   constructor(private personService: PersonService) { }
 
   resolve(route: ActivatedRouteSnapshot): PersonModel | Observable<PersonModel> | Promise<PersonModel> {
-    const id = route.paramMap.get('id');
-    console.log(id);
-    if (id.length > 24) {
+    if (route.paramMap.get('id') === null) {
       return new PersonModel();
+    } else {
+      const id = route.paramMap.get('id');
+      if (id.length > 24) {
+        return this.personService.findOne(id);
+      } else {
+        return new PersonModel();
+      }
     }
-    return this.personService.findOne(id);
   }
 }

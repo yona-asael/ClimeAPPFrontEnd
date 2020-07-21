@@ -10,10 +10,13 @@ import { PersonalEditComponent } from './services-tabs/personal-edit/personal-ed
 import { PersonResolver } from '../../core/resolvers/Personal.resolver';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MedicEditComponent } from './services-tabs/medic-edit/medic-edit.component';
+import { PersonsResolver } from '../../core/resolvers/Persons.resolver';
+import { MedicResolver } from '../../core/resolvers/Medic.resolver';
 
 
 @NgModule({
-  declarations: [ServicesTabsComponent, MedicListComponent, PersonalListComponent, PersonalEditComponent],
+  declarations: [ServicesTabsComponent, MedicListComponent, PersonalListComponent, PersonalEditComponent, MedicEditComponent],
   imports: [
     CommonModule,
     ServicesRoutingModule,
@@ -24,6 +27,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   providers: [
     PersonResolver,
+    PersonsResolver,
+    MedicResolver
   ]
 })
 export class ServicesModule { }
