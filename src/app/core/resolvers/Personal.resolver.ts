@@ -11,14 +11,11 @@ export class PersonResolver implements Resolve<PersonModel> {
 
   resolve(route: ActivatedRouteSnapshot): PersonModel | Observable<PersonModel> | Promise<PersonModel> {
     if (route.paramMap.get('id') === null) {
+      console.log(1);
       return new PersonModel();
     } else {
       const id = route.paramMap.get('id');
-      if (id.length > 24) {
-        return this.personService.findOne(id);
-      } else {
-        return new PersonModel();
-      }
+      return this.personService.findOne(id);
     }
   }
 }
