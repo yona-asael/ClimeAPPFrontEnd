@@ -1,60 +1,74 @@
-<div class="limiter animated fadeInLeft">
-    <div class="container-login100">
-        <div class="wrap-login100 p-t-50 p-b-90">
-            
-            <form (ngSubmit)="login( f )"
-                  #f="ngForm"
-                  class="login100-form validate-form flex-sb flex-w">
+<!--<p>login works!</p>-->
 
-                <span class="login100-form-title p-b-51">
-                    Login CLIMEAPP
-                </span>
-
-                <span *ngIf="f.submitted && f.controls['email'].errors"
-                          class="text-danger animated fadeIn">El correo es obligatorio</span>
-
-                <div class="wrap-input100 m-b-16">
-                    <input class="input100" 
-                           type="text" 
-                           name="email" 
-                           [(ngModel)]="usuario.email"
-                           required
-                           email
-                           placeholder="Email">
-
-                    <span class="focus-input100"></span>
-                </div>
-                
-                <span *ngIf="f.submitted && f.controls['password'].errors"
-                          class="text-danger animated fadeIn">Al menos 6 letras</span>
-                <div class="wrap-input100 m-b-16" data-validate = "Password is required">
-                    <input class="input100"
-                           type="password" 
-                           name="password" 
-                           [(ngModel)]="usuario.password"
-                           required
-                           minlength="6"
-                           placeholder="Password">
-                    <span class="focus-input100"></span>
-                </div>
-                
-                <div class="flex-sb-m w-full p-t-3 p-b-24">
-                    <div class="contact100-form-checkbox">
-                        <input [(ngModel)]="recordarme"
-                               class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                        <label class="label-checkbox100" for="ckb1">
-                            Recordar mi usuario
-                        </label>
+<div class="container-fluid">
+    <div class="row animated fadeInDown fast">
+        <div class="col-lg-9 p-0 d-none d-sm-none d-md-none d-lg-block">
+            <div id="carouselExampleIndicators" class="carousel slide vh-100" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="w-100 vh-100" src="assets/img/climeImage.jpg" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100 vh-100" src="assets/img/artesana.jpg" alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100 vh-100" src="assets/img/carpintero1.jpg" alt="Third slide">
                     </div>
                 </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Siguiente</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 kt-login-v1 vh-100">
+            <div class="container">
+                <div class="row">
 
-                <div class="container-login100-form-btn m-t-17">
-                    <button class="login100-form-btn" type="submit">
-                        Ingresar
-                    </button>
+                    <div class="col-12 text-center">
+                        <!--<img src="/assets/img/simboloDoc.png" style="height: 4em; width: 4em;">-->
+                        <h4 class="climme">
+                            CLIME
+                        </h4>
+                        <h4 class="appp">
+                            APP
+                        </h4>
+                    </div>
                 </div>
-
-            </form>
+                <form (ngSubmit)="onSubmit(frm)" #frm="ngForm">
+                    <div class="form-group">
+                        <label><i class="fa fa-envelope" aria-hidden="true"></i> Usuario</label>
+                        <input [(ngModel)]="login.strEmail" type="email" email class="form-control form-control-sm" name="strEmail" placeholder="Usuario" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa fa-lock" aria-hidden="true"></i> Contraseña</label>
+                        <input [(ngModel)]="login.strPassword" type="password" class="form-control form-control-sm" name="strPassword" placeholder="Contraseña" required>
+                    </div>
+                    <div class="form-group d-flex justify-content-between align-items-center">
+                        <div class="custom-control custom-checkbox">
+                            <input [(ngModel)]="recordarme" name="remember-me" type="checkbox" class="custom-control-input" id="rememberMe">
+                            <label class="custom-control-label" for="rememberMe">Recuérdame</label>
+                        </div>
+                         <!--<a [routerLink]="['/recuperarContra',0]" class="text-muted ml-1"><b>¿Olvidaste tu contraseña?</b></a> -->
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-sign-in" aria-hidden="true"></i> Iniciar Sesión</button>
+                    <div class="form-group d-flex justify-content-between align-items-center">
+                        <a [routerLink]="['/recuperarContra',0]" class="text-muted ml-1 mt-4">¿Olvidaste tu contraseña?</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
+
+

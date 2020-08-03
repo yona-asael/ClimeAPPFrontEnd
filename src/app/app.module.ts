@@ -22,6 +22,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { PersonService } from './core/services/person.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MedicService } from './core/services/medic.service';
+import { LoginComponent } from './Pages/login/login.component';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { MedicService } from './core/services/medic.service';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+    LoginComponent,
 
   ],
   providers: [
