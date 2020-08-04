@@ -24,7 +24,7 @@ export class PatientService {
     private http: HttpClient
   ) { }
 
-  public findOne(id: Number): Observable<PatientModel> {
+  public findOne(id: String): Observable<PatientModel> {
     return this.http.get<PatientModel>(this.API + `/${id}`, this.httpOptions).pipe(
       retry(1),
       catchError(this.handleError)

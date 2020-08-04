@@ -15,7 +15,7 @@ export class PatientResolver implements Resolve<PatientModel> {
       return new PatientModel();
     } else {
       const id = route.paramMap.get('id');
-      return this.patientservice.findOne(Number(id));
+      return this.patientservice.findOne(id);
     }
   }
 }
