@@ -35,7 +35,10 @@ export class MedicEditComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.persons = <PersonModel[]>this.activatedRoute.snapshot.data['persons'];
+    const personmodel  = <PersonModel[]>this.activatedRoute.snapshot.data['persons'];
+    if(personmodel){
+        this.persons = personmodel;
+    }
     this.medic  = <MedicModel>this.activatedRoute.snapshot.data['medic'];
     this.readOnly = this.activatedRoute.snapshot.data['readOnly'];
     this.isMedicUpdated = this.activatedRoute.snapshot.data['update'];
@@ -43,12 +46,17 @@ export class MedicEditComponent implements OnInit, OnDestroy {
   }
 
   createForm() {
-    this.medicForm = this.inputFB.group({
+      let person: PersonModel = new PersonModel();
+     if(person.name === ''){
+        person = <PersonModel>this.medic.person
+     }
+     this.medicForm = this.inputFB.group({
       cedP: [{ value: this.medic.cedP, disabled: this.readOnly }, [Validators.required]],
       grade: [{ value: this.medic.grade, disabled: this.readOnly }, [Validators.required]],
       university: [{ value: this.medic.university, disabled: this.readOnly }, [Validators.required]],
-      person: [{ value: this.medic.person, disabled: this.readOnly }, [Validators.required]],
+      person: [{ value: person.name, disabled: this.readOnly }, [Validators.required]],
     });
+  
   }
 
   saveChanges(): void {
@@ -78,6 +86,7 @@ export class MedicEditComponent implements OnInit, OnDestroy {
   }
 
 
+
   get getMedic() {
     const provControl = this.medicForm.controls;
     const Medic: IMedic = {
@@ -90,10 +99,10 @@ export class MedicEditComponent implements OnInit, OnDestroy {
   }
   get updatedMedic(): MedicModel {
     const provControl = this.medicForm.controls;
-    this.medic.cedP = provControl.name.value;
-    this.medic.grade = provControl.lastname.value;
-    this.medic.university = provControl.cellphone.value;
-    this.medic.person = provControl.address.value;
+    this.medic.cedP = provControl.cedP.value;
+    this.medic.grade = provControl.grade.value;
+    this.medic.university = provControl.university.value;
+    this.medic.person = provControl.person.value._id;
     return this.medic;
   }
 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.component';
 import { MaterialModule } from '../../material.module';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -13,6 +14,7 @@ import { MaterialModule } from '../../material.module';
   imports: [
     CommonModule,
     MaterialModule,
+    MatDialogModule
   ],
   exports: [
     DeleteDialogComponent

@@ -1,1 +1,116 @@
-<p>user-create works!</p>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <div id="typography">
+          <div class="card-title">
+            <h2>Datos de Paciente</h2>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <mat-tab-group>
+                <mat-tab>
+                  <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">person</mat-icon>
+                    Datos del Paciente
+                  </ng-template>
+                  <mat-divider></mat-divider>
+                  <div class="row">
+                    <div class="col-9"></div>
+                    <div class="col-1">
+                    
+                                <a [routerLink]="['/user']" mat-raised-button class="mat-icon-inline">
+                                    <mat-icon>arrow_back</mat-icon>
+                                    Regresar
+                                </a>
+                    </div>                    
+                    <div class="col-2"> 
+                                <button mat-raised-button color="primary" *ngIf="!readOnly" (click)="saveChanges()">
+                                    <mat-icon>save</mat-icon>
+                                    Guardar Cambios
+                                </button>
+                    </div>
+                  </div>
+                  <br>
+                  <mat-divider></mat-divider>
+                        <form [formGroup]="patientForm">
+                    <div class="row">
+                        <div class="col-sm-3">
+                           <mat-form-field class="mat-form-field-fluid">
+                                <input formControlName="name" matInput placeholder="Escriba el nombre" required>
+                                <mat-hint align="start">Escriba el <strong>nombre</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-3">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input matInput formControlName="lastname" placeholder="Escriba los apellidos"
+                                    required>
+                                <mat-hint align="start">Escriba los <strong>Apellidos</strong>
+                                </mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-3">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input matInput formControlName="address" placeholder="Escriba la direccion"
+                                    required>
+                                <mat-hint align="start">Escriba la <strong>direccion</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                            <div class="col-sm-3">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input matInput formControlName="tel" placeholder="Escriba el telefono"
+                                    required>
+                                <mat-hint align="start">Escriba el <strong>telefono</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+                         <div class="col-sm-3">
+                            <mat-form-field class="mat-form-field-fluid">
+                                  <mat-select formControlName="SEX" placeholder="Seleccione el sexo">
+                                  <mat-option value="Hombre">Hombre</mat-option>
+                                  <mat-option value="Mujer">Mujer</mat-option>
+                                  </mat-select>
+                                <mat-hint align="start">Seleccione el <strong>sexo</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+                         <div class="col-sm-3">
+                            <mat-form-field class="mat-form-field-fluid"  color="accent" >
+                                  <mat-label>Selecion fecha</mat-label>
+                                    <input matInput formControlName="Date"  [matDatepicker]="picker">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                <mat-hint align="start">Seleccione la <strong>fecha de nacimiento</strong></mat-hint>
+                            </mat-form-field>
+                        </div>                        
+                      
+                             
+    
+                    </div>
+                </form>
+
+
+                </mat-tab>
+                <mat-tab *ngIf="readOnly === true || isPatientUpdate === true" >
+                  <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">list</mat-icon>
+                    Historial
+                  </ng-template>
+                  <div class="row">
+                    <div class="col-10">
+                      <h3>Historial del paciente</h3>
+                    </div>
+                  </div>
+                  <mat-divider></mat-divider>
+                  <div class="row">
+                    <div class="col-12"></div>
+                  </div>
+                </mat-tab>
+              </mat-tab-group>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

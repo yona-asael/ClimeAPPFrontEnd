@@ -15,9 +15,6 @@ import { UserProfileComponent } from './default/user-profile/user-profile.compon
 import { TableListComponent } from './default/table-list/table-list.component';
 import { TypographyComponent } from './default/typography/typography.component';
 import { NotificationsComponent } from './default/notifications/notifications.component';
-import {
-  AgmCoreModule
-} from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { PersonService } from './core/services/person.service';
 import { HttpClientModule } from '@angular/common/http';

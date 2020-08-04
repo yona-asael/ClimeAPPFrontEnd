@@ -14,6 +14,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
+import {MatSelectModule} from '@angular/material/select'; 
+import {MatDatepickerModule} from '@angular/material/datepicker'; 
+import {MatNativeDateModule} from '@angular/material/core';
+
 @NgModule({
     imports: [
         MatButtonModule,
@@ -30,7 +34,10 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
         MatProgressBarModule,
         MatDialogModule,
         MatTableModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,        
     ],
     exports: [
         MatButtonModule,
@@ -47,7 +54,10 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
         MatProgressBarModule,
         MatDialogModule,
         MatTableModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
     ]
 })
 export class MaterialModule { }

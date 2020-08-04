@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { UserCreateComponent } from './user-create/user-create.component';
+import {PatientResolver} from 'app/core/resolvers/Patient.resolver';
 
 
 const routes: Routes = [
@@ -21,7 +22,7 @@ const routes: Routes = [
       {
         path: 'create',
         component: UserCreateComponent,
-        // resolve: { client: ClientResolver },
+        resolve: { patient: PatientResolver },
         data: {
           title: 'Crear',
           readOnly: false,
@@ -31,7 +32,7 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: UserCreateComponent,
-        // resolve: { client: ClientResolver },
+        resolve: { patient: PatientResolver },
         data: {
           title: 'Edit',
           readOnly: false,
@@ -39,9 +40,9 @@ const routes: Routes = [
         },
       },
       {
-        path: 'ver/:id',
+        path: 'see/:id',
         component: UserCreateComponent,
-        // resolve: { client: ClientResolver },
+        resolve: { patient: PatientResolver },
         data: {
           title: 'Crear',
           readOnly: true,

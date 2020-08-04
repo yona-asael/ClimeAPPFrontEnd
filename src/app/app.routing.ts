@@ -11,10 +11,11 @@ const routes: Routes = [
     path: '',
     redirectTo: '/',
     pathMatch: 'full',
-  }, {
+  },
+  {
     path: '',
-    //component: AdminLayoutComponent,
-    component: LoginComponent,
+    component: AdminLayoutComponent,
+    //component: LoginComponent,
     children: [{
       path: '',
       loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
@@ -26,9 +27,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes, {
-      useHash: true
-    })
+    RouterModule.forRoot(routes)
   ],
   exports: [
   ],

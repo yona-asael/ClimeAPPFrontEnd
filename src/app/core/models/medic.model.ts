@@ -5,5 +5,5 @@ export class MedicModel {
     public university: String;
     public grade: String;
     public cedP: String;
-    public person: String | PersonModel;
+    public person: PersonModel | String;
 }

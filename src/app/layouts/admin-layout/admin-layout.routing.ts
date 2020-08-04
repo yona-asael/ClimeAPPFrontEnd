@@ -8,10 +8,6 @@ import { NotificationsComponent } from '../../default/notifications/notification
 
 export const AdminLayoutRoutes: Routes = [
     {
-        path: 'history',
-        loadChildren: () => import('../../Pages/history/history.module').then(m => m.HistoryModule),
-    },
-    {
         path: 'user',
         loadChildren: () => import('../../Pages/user/user.module').then(m => m.UserModule),
     },

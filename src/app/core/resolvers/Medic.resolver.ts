@@ -12,12 +12,10 @@ export class MedicResolver implements Resolve<MedicModel> {
 
   resolve(route: ActivatedRouteSnapshot): MedicModel | Observable<MedicModel> | Promise<MedicModel> {
     if (route.paramMap.get('id') === null) {
-      console.log(1);
       return new MedicModel();
     } else {
       const id = route.paramMap.get('id');
       return this.medicService.findOne(id);
     }
-    return new MedicModel();
   }
 }
