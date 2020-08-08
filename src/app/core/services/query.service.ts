@@ -3,16 +3,17 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { MedicModel } from '../models/medic.model';
-import { IMedic } from '../interface/Medic.interface';
+import { QueryModel } from '../models/query.model';
+import { IQuery } from '../interface/query.interface';
 import { PaginationModel } from '../models/pagination.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class MedicService {
-  private API = environment.API_ENDPOINT + 'medics';
+export class QueryService {
+
+  private API = environment.API_ENDPOINT + 'query';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -24,14 +25,14 @@ export class MedicService {
     private http: HttpClient
   ) { }
 
-  public findOne(id: string): Observable<MedicModel> {
-    return this.http.get<MedicModel>(this.API + `/${id}`, this.httpOptions).pipe(
+  public findOne(id: string): Observable<QueryModel> {
+    return this.http.get<QueryModel>(this.API + `/${id}`, this.httpOptions).pipe(
       retry(1),
       catchError(this.handleError)
     );
   }
-  public getALL(): Observable<MedicModel[]> {
-    return this.http.get<MedicModel[]>(this.API + '/', this.httpOptions).pipe(
+  public getALL(): Observable<QueryModel[]> {
+    return this.http.get<QueryModel[]>(this.API + '/', this.httpOptions).pipe(
       retry(1),
       catchError(this.handleError),
     );
@@ -46,14 +47,14 @@ export class MedicService {
     );
   }
 
-  public create(user: IMedic): Observable<MedicModel> {
-    return this.http.post<MedicModel>(this.API, JSON.stringify(user), this.httpOptions).pipe(
+  public create(user: IQuery): Observable<QueryModel> {
+    return this.http.post<QueryModel>(this.API, JSON.stringify(user), this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
 
-  public update(user: MedicModel): Observable<MedicModel> {
-    return this.http.put<MedicModel>(this.API + `/${user._id}`, JSON.stringify(user), this.httpOptions).pipe(
+  public update(user: QueryModel): Observable<QueryModel> {
+    return this.http.put<QueryModel>(this.API + `/${user.folio}`, JSON.stringify(user), this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }

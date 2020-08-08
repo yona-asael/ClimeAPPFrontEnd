@@ -1,50 +1,60 @@
-<div class="main-content">
-    <div class="container-fluid">
-        <div class="card">
-            <div class="card-body">
-                <div id="typography">
-                    <div class="card-title">
-                        <h2>Historial de citas</h2>
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <h3>Cistas</h3>
-                        </div>
-                        <div class="col-4">
-                        </div>
-                    </div>
-                    <mat-divider></mat-divider>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead class=" text-primary">
-                                        <th>Folio</th>
-                                        <th>Paciente|Folio</th>
-                                        <th>Doctor|Folio</th>
-                                        <th>Fecha</th>
-                                        <!-- <th>Acciones</th> -->
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Urgencias</td>
-                                            <td>Primera instancia en caso de un accidente</td>
-                                            <td>JRG</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Terapia Fisica</td>
-                                            <td>Apoyo a rehabilitacion fisica de las personas</td>
-                                            <td>PMG</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+<div class="mat-table">
+    <div class="mat-table__wrapper">
 
-                    </div>
-                </div>
-            </div>
-        </div>
+        <table mat-table #table matSort matsortactive="id" matsortdirection="asc" [dataSource]="DataSource"
+            class=" mat-elevation-z8">
+            <mat-progress-bar mode="indeterminate" *ngIf="DataSource.loading$ | async"></mat-progress-bar>
+
+            <ng-container matColumnDef="FOLIO">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Folio </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.query.folio}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="PATIENID">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Id paciente / Identificador </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.query.id}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="MEDICID">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Id medico </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.query.id_medic}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="FECHA">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.query.fecha}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="ACTIONS">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones </th>
+                <td mat-cell *matCellDef="let element">
+                    <span class="mobile-label">Acciones:</span>
+                    
+                    <a [routerLink]="[baseRoute,'query','edit',element.folio]" mat-icon-button color="primary"
+                        matTooltip="Ver Editar consulta">
+                        <mat-icon>create</mat-icon>
+                    </a>&nbsp;
+                    <a [routerLink]="[baseRoute,'medic','see',element._id]" mat-icon-button color="primary"
+                        matTooltip="Ver  consulta">
+                        <mat-icon>visibility</mat-icon>
+                    </a>&nbsp;
+                    <button mat-icon-button color="warn" type="button" (click)="deleteClient(element.folio)"
+                        matTooltip="Eliminar consulta">
+                        <mat-icon>delete</mat-icon>
+                    </button>&nbsp;
+
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSize]="15" [pageSizeOptions]="[1, 10, 25, 50]"
+            [length]="DataSource.paginatorTotal$ | async">
+        </mat-paginator>
+
     </div>
+</div>

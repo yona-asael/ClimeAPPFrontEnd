@@ -14,7 +14,7 @@ export const ROUTES: RouteInfo[] = [
   // { path: '/typography', title: 'Typography', icon: 'library_books', class: '' },
   // { path: '/notifications', title: 'Notifications', icon: 'notifications', class: '' },
 
-  { path: '/appointment', title: 'Citas', icon: 'date_range', class: '' },
+  { path: '/appointment', title: 'Consultas', icon: 'date_range', class: '' },
   { path: '/pharmacy', title: 'Farmacia', icon: 'medical_services', class: '' },
   { path: '/user', title: 'Pacientes', icon: 'person', class: '' },
   { path: '/services', title: 'Servicios', icon: 'library_books', class: '' },
