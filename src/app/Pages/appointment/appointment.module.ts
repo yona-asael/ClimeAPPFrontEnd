@@ -5,14 +5,16 @@ import { AppointmentRoutingModule } from './appointment-routing.module';
 import { AppointmentListComponent } from './appointment-list/appointment-list.component';
 import { AppointmentEditComponent } from './appointment-edit/appointment-edit.component';
 import { MatDividerModule } from '@angular/material/divider';
-import { MaterialModule } from 'app/material.module';
-import {AppointService} from 'app/core/services/appoint.service';
+import { MaterialModule } from '../../material.module';
+import {AppointService} from '../../core/services/appoint.service';
 import { CreateComponent } from './appointment-edit/create/create.component';
-import {MedicsResolver} from 'app/core/resolvers/Medics.resolver';
-import {PatientsResolver} from 'app/core/resolvers/Patients.resolver';
-import {AppointResolver} from 'app/core/resolvers/Appoint.resolver';
+import {MedicsResolver} from '../../core/resolvers/Medics.resolver';
+import {PatientsResolver} from '../../core/resolvers/Patients.resolver';
+import {AppointResolver} from '../../core/resolvers/Appoint.resolver';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
+import { RecipeService } from '../../core/services/recipe.service';
+import { RecipeResolver } from '../../core/resolvers/Recipe.resolver';
 
 
 @NgModule({
@@ -28,9 +30,11 @@ import {SharedModule} from '../shared/shared.module';
   ],
   providers: [
     AppointService,
+    RecipeService,
     MedicsResolver,
     PatientsResolver,
     AppointResolver,
+    RecipeResolver,
   ]
 })
 export class AppointmentModule { }

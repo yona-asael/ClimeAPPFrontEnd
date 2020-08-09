@@ -4,15 +4,28 @@
       <div class="card-body">
         <div id="typography">
           <div class="card-title">
-            <h2>Consultas</h2>
+           <div class="row">
+             <div class="col-9">
+               <h2>Consultas</h2>
+
+             </div>
+             <div class="col-1" >
+              <button [routerLink]="['/appointment']" mat-raised-button class="mat-icon-inline">
+                <mat-icon>arrow_back</mat-icon>
+                Regresar
+              </button >
+              </div>
+              <div class="col-2"> 
+                <div *ngIf="!readOnly && isAppointUpdate">
+                  <button mat-raised-button color="primary">Finalizar Consulta</button>
+                </div>
+              </div>
+          </div>
+
           </div>
           <div class="row">
-            <div class="col-10">
+            <div class="col-9">
               <h3>Datos de consulta</h3>
-            </div>
-            <div class="col-2">
-              <br />
-              <div class="d-flex align-items-end"></div>
             </div>
           </div>
           <mat-divider></mat-divider>
@@ -23,7 +36,65 @@
             <ng-container *ngIf="!readOnly && !isAppointUpdate; else elseBlock">
               <app-create [patients]="patients" [medics]="medics" ></app-create>
             </ng-container>
-            <ng-template #elseBlock> </ng-template>
+            <ng-template #elseBlock> 
+
+              <form [formGroup]="recipeForm">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <mat-form-field class="mat-form-field-fluid">
+                            <input formControlName="TA" matInput placeholder="Escriba el TA" required>
+                            <mat-hint align="start">Escriba el <strong>TA</strong></mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-2">
+                        <mat-form-field class="mat-form-field-fluid">
+                            <input matInput formControlName="T" placeholder="Escriba el T"
+                                required>
+                            <mat-hint align="start">Escriba el <strong>T</strong>
+                            </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-2">
+                        <mat-form-field class="mat-form-field-fluid">
+                            <input matInput formControlName="FC" placeholder="Escriba el FC"
+                                required>
+                            <mat-hint align="start">Escriba el <strong>FC</strong></mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-2">
+                      <mat-form-field class="mat-form-field-fluid">
+                          <input matInput formControlName="FR" placeholder="Escriba el FR"
+                              required>
+                          <mat-hint align="start">Escriba el <strong>FR</strong></mat-hint>
+                      </mat-form-field>
+                  </div>
+                  <div class="col-sm-2">
+                    <mat-form-field class="mat-form-field-fluid"  color="accent" >
+                          <mat-label>Selecion fecha</mat-label>
+                            <input matInput formControlName="dateExp"  [matDatepicker]="picker">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        <mat-hint align="start">Seleccione la <strong>fecha de expiracion</strong></mat-hint>
+                    </mat-form-field>
+                </div>    
+                <div class="col-sm-12">
+                  <mat-form-field class="mat-form-field-fluid"  color="accent" >
+                    <textarea 
+                    matInput 
+                    formControlName="dignostic" 
+                    placeholder="Escriba el diagnostico"
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="100">
+                    required></textarea>
+                <mat-hint align="start">Escriba el <strong>diagnostico</strong></mat-hint>
+              </mat-form-field>
+
+                </div>
+                    </div>
+                </form>
+            </ng-template>
           </div>
         </div>
       </div>

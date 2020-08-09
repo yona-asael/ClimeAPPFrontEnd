@@ -22,6 +22,7 @@ export class PersonalEditComponent implements OnInit, OnDestroy {
   readOnly: boolean;
   baseRoute = '/services';
   isPersonUpdated: boolean = false;
+  isCreate: boolean = false;
   personForm: FormGroup;
   userForm: FormGroup;
   person: PersonModel;
@@ -49,6 +50,7 @@ export class PersonalEditComponent implements OnInit, OnDestroy {
     }
     this.readOnly = this.activatedRoute.snapshot.data['readOnly'];
     this.isPersonUpdated = this.activatedRoute.snapshot.data['update'];
+    this.isCreate = this.activatedRoute.snapshot.data['create'];
     this.createForm();
     this.createUserForm();
   }
@@ -60,6 +62,7 @@ export class PersonalEditComponent implements OnInit, OnDestroy {
       address: [{ value: this.person.address, disabled: this.readOnly }, [Validators.required]],
       cellphone: [{ value: this.person.cellphone, disabled: this.readOnly }, [Validators.required, Validators.pattern('^[0-9]*$')]],
       job: [{ value: this.person.job, disabled: this.readOnly }, [Validators.required]],
+      rol: [{ valie: this.person.rol, disabled: this.readOnly}],
     });
   }
 
@@ -140,6 +143,7 @@ export class PersonalEditComponent implements OnInit, OnDestroy {
     this.person.address = provControl.address.value;
     this.person.cellphone = provControl.cellphone.value;
     this.person.job = provControl.job.value;
+    this.person.rol = provControl.rol.value;
     return this.person;
   }
 

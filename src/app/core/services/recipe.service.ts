@@ -20,7 +20,7 @@ export class RecipeService {
     private http: HttpClient
   ) { }
 
-  public findOne(id: Number): Observable<any> {
+  public findOne(id: string): Observable<any> {
     return this.http.get<any>(this.API + `/${id}`, this.httpOptions).pipe(
       retry(1),
       catchError(this.handleError)

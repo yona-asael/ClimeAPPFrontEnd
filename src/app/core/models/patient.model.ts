@@ -1,3 +1,5 @@
+import {AppointModel} from "./appoint.model";
+
 export class PatientModel {
     public _id: string;
     public folio: string;
@@ -7,6 +9,7 @@ export class PatientModel {
     public address: string;
     public cellphone: number;
     public SEX: string;
+    public history: AppointModel;
 }
 
 

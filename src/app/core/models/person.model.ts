@@ -5,7 +5,10 @@ export class PersonModel {
     address: string;
     cellphone: string;
     job: string;
+    rol: string;
 }
+
+
 
 
 

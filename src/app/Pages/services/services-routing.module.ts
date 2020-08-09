@@ -32,6 +32,7 @@ const routes: Routes = [
           title: 'Crear',
           readOnly: false,
           update: false,
+          create: true,
         },
       },
       {
@@ -42,6 +43,7 @@ const routes: Routes = [
           title: 'Edit',
           readOnly: false,
           update: true,
+          create: false
         },
       },
       {
@@ -52,6 +54,7 @@ const routes: Routes = [
           title: 'Crear',
           readOnly: true,
           update: false,
+          create: false,
         },
       }
       ,

@@ -1,4 +1,5 @@
 export class RecipeModel {
+    public _id: string;
     public date: Date;
     public dignostic: string;
     public TA: string;
