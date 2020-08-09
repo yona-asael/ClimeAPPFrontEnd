@@ -57,7 +57,7 @@ export class UserCreateComponent implements OnInit {
   }
 
   addPatient(): void {
-    this.patientService.create(this.getPatient).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
+      this.patientService.create(this.getPatient).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
     this._snackBar.open('Paciente Registrado ', 'Cerrar', {
       duration: 2000,
     });
@@ -66,7 +66,7 @@ export class UserCreateComponent implements OnInit {
   }
 
   updatePatient() {
-    this.patientService.update(this.updatedPatient).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
+     this.patientService.update(this.updatedPatient).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
       this._snackBar.open('Paciente Actualizado', 'Cerrar', {
         duration: 2000,
       });
@@ -79,6 +79,7 @@ export class UserCreateComponent implements OnInit {
   get getPatient() {
     const provControl = this.patientForm.controls;
     const Patient: IPatient = {
+        folio: this.genFolio,
         name: provControl.name.value,
         lastname: provControl.lastname.value,
         address: provControl.address.value,
@@ -88,8 +89,10 @@ export class UserCreateComponent implements OnInit {
     };
     return Patient;
   }
+
   get updatedPatient(): PatientModel {
     const provControl = this.patientForm.controls;
+    this.patient.folio = this.genFolio;
     this.patient.name = provControl.name.value;
     this.patient.lastname = provControl.lastname.value;
     this.patient.address = provControl.address.value;
@@ -99,6 +102,16 @@ export class UserCreateComponent implements OnInit {
     return this.patient;
   }
 
+  get genFolio(): string {
+    const provControl = this.patientForm.controls;
+    const name: string = provControl.name.value.substring(0, 2).toUpperCase() ;
+    const lastname: string = provControl.lastname.value.substring(0, 2).toUpperCase();
+    const sex: string = provControl.SEX.value.charAt(0).toUpperCase();
+    const year: string = String(provControl.Date.value.getFullYear()).substring(2,4);
+    const day: string = String(provControl.Date.value.getDay());
+    const tel: string = String(provControl.tel.value).substring(6, 10);
+    return `${name}${lastname}${sex}${year}${day}${tel}`;
+  }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();

@@ -1,14 +1,13 @@
 import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Subject, merge } from 'rxjs';
-import QueryDataSource from '../../../core/datasource/query.datasource';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { QueryService } from '../../../core/services/query.service';
+import { AppointService } from '../../../core/services/appoint.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { takeUntil, tap, take } from 'rxjs/operators';
 import { DeleteDialogComponent } from '../../shared/dialogs/delete-dialog/delete-dialog.component';
-
+import  AppointDataSource   from '../../../core/datasource/Appoint.datasource';
 
 @Component({
   selector: 'app-appointment-list',
@@ -19,23 +18,23 @@ import { DeleteDialogComponent } from '../../shared/dialogs/delete-dialog/delete
 export class AppointmentListComponent implements OnInit {
 
   private ngUnsubscribe = new Subject();
-  baseRoute = '/services';
-  DataSource: QueryDataSource;
+  baseRoute = '/appointment';
+  DataSource: AppointDataSource;
   dataSource_loaded = false;
-  displayedColumns: String[] = ['FOLIO', 'PATIENID', 'MEDICID', 'FECHA'];
+  displayedColumns: String[] = ['FOLIO', 'PATIENID', 'MEDICID', 'FECHA', 'ACTIONS'];
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
 
   constructor(
-    public queryService: QueryService,
+    public appointService: AppointService,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
-    this.DataSource = new QueryDataSource(this.queryService);
+    this.DataSource = new AppointDataSource(this.appointService);
   }
 
   ngAfterViewInit(): void {
@@ -55,7 +54,7 @@ export class AppointmentListComponent implements OnInit {
         takeUntil(this.ngUnsubscribe)
       ).subscribe();
 
-    this.DataSource = new QueryDataSource(this.queryService);
+    this.DataSource = new AppointDataSource(this.appointService);
 
     this.DataSource.connect().pipe(take(2)).subscribe((value) => {
       this.dataSource_loaded = !!value;
@@ -71,7 +70,7 @@ export class AppointmentListComponent implements OnInit {
     const dialogRef = this.dialog.open(DeleteDialogComponent);
     dialogRef.afterClosed().pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
       if (result) {
-        this.queryService.delete(id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
+        this.appointService.delete(id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
           if (res) {
             this._snackBar.open('Persona Eliminado', 'Cerrar', {
               duration: 2000,

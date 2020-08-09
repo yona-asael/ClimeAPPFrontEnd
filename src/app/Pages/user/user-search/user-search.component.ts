@@ -20,7 +20,7 @@ export class UserSearchComponent implements OnInit, OnDestroy, AfterViewInit {
   baseRoute = '/user';
   DataSource: PatientDataSource; 
   dataSource_loaded = false;
-  displayedColumns: String[] = ['NAME', 'LASTNAME', 'DATE', 'ADDRESS', 'TEL',  'SEX', 'ACTIONS'];
+  displayedColumns: String[] = ['FOLIO','NAME', 'LASTNAME', 'DATE', 'ADDRESS', 'TEL',  'SEX', 'ACTIONS'];
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;

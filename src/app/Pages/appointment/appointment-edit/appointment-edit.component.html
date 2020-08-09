@@ -1,1 +1,32 @@
-<p>appointment-edit works!</p>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <div id="typography">
+          <div class="card-title">
+            <h2>Consultas</h2>
+          </div>
+          <div class="row">
+            <div class="col-10">
+              <h3>Datos de consulta</h3>
+            </div>
+            <div class="col-2">
+              <br />
+              <div class="d-flex align-items-end"></div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <br />
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <ng-container *ngIf="!readOnly && !isAppointUpdate; else elseBlock">
+              <app-create></app-create>
+            </ng-container>
+            <ng-template #elseBlock> </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

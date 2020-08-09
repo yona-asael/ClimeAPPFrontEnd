@@ -1,9 +1,10 @@
 import { MedicModel } from "./medic.model";
 import { PersonModel } from "./person.model";
 import { PatientModel } from "./patient.model";
+import {AppointModel} from "./appoint.model";
 
 export class PaginationModel {
-  data: PatientModel[] | MedicModel[] | PersonModel[] | null;
+  data: AppointModel[] | PatientModel[] | MedicModel[] | PersonModel[] | null;
   pagination: Pagination;
 }
 

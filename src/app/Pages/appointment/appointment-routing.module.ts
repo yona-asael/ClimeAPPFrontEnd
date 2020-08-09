@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppointmentListComponent } from './appointment-list/appointment-list.component';
 import { AppointmentEditComponent } from './appointment-edit/appointment-edit.component';
+import {MedicsResolver} from 'app/core/resolvers/Medics.resolver';
+import {AppointResolver} from 'app/core/resolvers/Appoint.resolver';
+import {PatientsResolver} from 'app/core/resolvers/Patients.resolver';
 
 
 const routes: Routes = [
@@ -23,7 +26,7 @@ const routes: Routes = [
       {
         path: 'create',
         component: AppointmentEditComponent,
-        // resolve: { client: ClientResolver },
+        resolve: { medics: MedicsResolver, patients: PatientsResolver, appoint: AppointResolver },
         data: {
           title: 'Crear',
           readOnly: false,

@@ -3,20 +3,20 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { QueryModel } from '../models/query.model';
-import { IQuery } from '../interface/query.interface';
 import { PaginationModel } from '../models/pagination.model';
+import {AppointModel} from '../models/appoint.model';
+import {IAppoint} from '../interface/Appoint.interface';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class QueryService {
+export class AppointService {
 
-  private API = environment.API_ENDPOINT + 'appoints';
-  private httpOptions = {
+    private API = environment.API_ENDPOINT + 'appoints';
+    private httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json',
+       'Content-Type': 'application/json',
     }),
     params: new HttpParams(),
   };
@@ -25,14 +25,14 @@ export class QueryService {
     private http: HttpClient
   ) { }
 
-  public findOne(id: string): Observable<QueryModel> {
-    return this.http.get<QueryModel>(this.API + `/${id}`, this.httpOptions).pipe(
+  public findOne(id: string): Observable<AppointModel> {
+    return this.http.get<AppointModel>(this.API + `/${id}`, this.httpOptions).pipe(
       retry(1),
       catchError(this.handleError)
     );
   }
-  public getALL(): Observable<QueryModel[]> {
-    return this.http.get<QueryModel[]>(this.API + '/', this.httpOptions).pipe(
+  public getALL(): Observable<AppointModel[]> {
+    return this.http.get<AppointModel[]>(this.API + '/', this.httpOptions).pipe(
       retry(1),
       catchError(this.handleError),
     );
@@ -47,14 +47,14 @@ export class QueryService {
     );
   }
 
-  public create(user: IQuery): Observable<QueryModel> {
-    return this.http.post<QueryModel>(this.API, JSON.stringify(user), this.httpOptions).pipe(
+  public create(user: IAppoint): Observable<AppointModel> {
+    return this.http.post<AppointModel>(this.API, JSON.stringify(user), this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
 
-  public update(user: QueryModel): Observable<QueryModel> {
-    return this.http.put<QueryModel>(this.API + `/${user.folio}`, JSON.stringify(user), this.httpOptions).pipe(
+  public update(user: AppointModel): Observable<AppointModel> {
+    return this.http.put<AppointModel>(this.API + `/${user._id}`, JSON.stringify(user), this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
@@ -74,4 +74,5 @@ export class QueryService {
     }
     return throwError(errorMessage);
   }
+
 }

@@ -1,0 +1,37 @@
+<mat-horizontal-stepper linear #stepper>
+     <mat-step [stepControl]="patientForm" >
+    <form [formGroup]="patientForm">
+      <ng-template matStepLabel>Selecciona el paciente</ng-template>
+      <mat-form-field>
+        <mat-label>Paciente</mat-label>
+        <input matInput formControlName="firstCtrl" placeholder="Seleccione el paciente deseado" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="medicForm" >
+    <form [formGroup]="medicForm">
+      <ng-template matStepLabel>Seleccione el medico</ng-template>
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+               required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+

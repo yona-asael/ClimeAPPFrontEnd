@@ -1,5 +1,6 @@
 export class PatientModel {
     public _id: string;
+    public folio: string;
     public name: string;
     public lastname: string;
     public Date: Date;
