@@ -18,6 +18,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker'; 
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
     imports: [
@@ -40,6 +41,7 @@ import {MatStepperModule} from '@angular/material/stepper';
         MatDatepickerModule,
         MatNativeDateModule,        
         MatStepperModule,
+        MatTooltipModule,
     ],
     exports: [
         MatButtonModule,
@@ -61,6 +63,7 @@ import {MatStepperModule} from '@angular/material/stepper';
         MatDatepickerModule,
         MatNativeDateModule,
         MatStepperModule,
+        MatTooltipModule,
     ]
 })
 export class MaterialModule { }

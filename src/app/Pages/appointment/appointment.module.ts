@@ -11,6 +11,8 @@ import { CreateComponent } from './appointment-edit/create/create.component';
 import {MedicsResolver} from 'app/core/resolvers/Medics.resolver';
 import {PatientsResolver} from 'app/core/resolvers/Patients.resolver';
 import {AppointResolver} from 'app/core/resolvers/Appoint.resolver';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
@@ -20,6 +22,9 @@ import {AppointResolver} from 'app/core/resolvers/Appoint.resolver';
     AppointmentRoutingModule,
     MatDividerModule,
     MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
   ],
   providers: [
     AppointService,

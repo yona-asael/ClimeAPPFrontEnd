@@ -66,7 +66,7 @@ export class AppointmentListComponent implements OnInit {
   }
 
 
-  deleteClient(id: String) {
+  deleteConsulta(id: String) {
     const dialogRef = this.dialog.open(DeleteDialogComponent);
     dialogRef.afterClosed().pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
       if (result) {

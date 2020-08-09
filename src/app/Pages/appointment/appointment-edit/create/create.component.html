@@ -1,37 +1,71 @@
 <mat-horizontal-stepper linear #stepper>
-     <mat-step [stepControl]="patientForm" >
+  <mat-step [stepControl]="patientForm">
     <form [formGroup]="patientForm">
-      <ng-template matStepLabel>Selecciona el paciente</ng-template>
-      <mat-form-field>
+      <mat-form-field class="mat-form-field-fluid">
+        <ng-template matStepLabel>Selecciona el paciente</ng-template>
         <mat-label>Paciente</mat-label>
-        <input matInput formControlName="firstCtrl" placeholder="Seleccione el paciente deseado" required>
-      </mat-form-field>
+       <input matInput [matAutocomplete]="personSelect" formControlName="firstCtrl"
+       placeholder="Escriba el paciente "  required>
+      <mat-autocomplete #personSelect="matAutocomplete">
+     <ng-container *ngFor="let  patient  of patients">
+         <mat-option [value]="patient" (onSelectionChange)="onSelect($event)" 
+                        matTooltip="{{ patient.folio }} |{{patient.name}} {{ patient.lastname }}"
+                        >
+                {{patient.folio}}| {{ patient.name }} {{ patient.lastname }} {{patient.SEX}} {{patient.address}}{{patient.cellphone}}
+            </mat-option>
+          </ng-container>
+     </mat-autocomplete>
+     <mat-hint align="start">Seleccione la <strong>Paciente</strong></mat-hint>
+    </mat-form-field>
+
+
+    <mat-divider></mat-divider>
       <div>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-raised-button matStepperNext color="primary"
+            > Next</button>
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="medicForm" >
+  <mat-step [stepControl]="medicForm">
     <form [formGroup]="medicForm">
-      <ng-template matStepLabel>Seleccione el medico</ng-template>
-      <mat-form-field>
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-               required>
-      </mat-form-field>
+     <mat-form-field class="mat-form-field-fluid">
+        <ng-template matStepLabel>Selecciona el paciente</ng-template>
+        <mat-label>Paciente</mat-label>
+       <input matInput [matAutocomplete]="medicSelect" formControlName="secondCtrl"
+       placeholder="Escriba el medico "  required>
+      <mat-autocomplete #medicSelect="matAutocomplete">
+     <ng-container *ngFor="let  medic  of medics">
+         <mat-option [value]="medic" (onSelectionChange)="onSelectMedic($event)" 
+                        matTooltip="{{medic.person.name}} {{ medic.person.lastname}}"
+                        >
+             {{ medic.person.name }} {{ medic.person.lastname }}
+            </mat-option>
+          </ng-container>
+     </mat-autocomplete>
+     <mat-hint align="start">Seleccione la <strong>Paciente</strong></mat-hint>
+    </mat-form-field>
+
+
+    <mat-divider></mat-divider>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-raised-button matStepperPrevious>Back</button>
+        <button mat-raised-button matStepperNext color="primary">Next</button>
       </div>
     </form>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
+        <ng-template matStepLabel>Guardar Consultorio</ng-template>
+      <div class="row">
+          <div class="col-4"></div>
+        <div class="col-4 d-flex align-items-center">
+         <h3>Agregar Consulta</h3> 
+         &nbsp;
+        <button mat-raised-button color= "primary" (click)="addAppoint()"><mat-icon>save</mat-icon> Guardar </button>
+        </div>
+          <div class="col-4"></div>
+      </div>
+      <div>
       <button mat-button (click)="stepper.reset()">Reset</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>
-

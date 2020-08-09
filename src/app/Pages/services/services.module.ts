@@ -13,6 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MedicEditComponent } from './services-tabs/medic-edit/medic-edit.component';
 import { PersonsResolver } from '../../core/resolvers/Persons.resolver';
 import { MedicResolver } from '../../core/resolvers/Medic.resolver';
+import {UserResolver} from 'app/core/resolvers/User.resolver';
+import {AuthService} from 'app/core/services/auth.service';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { MedicResolver } from '../../core/resolvers/Medic.resolver';
   providers: [
     PersonResolver,
     PersonsResolver,
-    MedicResolver
+    MedicResolver,
+    UserResolver,
+    AuthService
   ]
 })
 export class ServicesModule { }

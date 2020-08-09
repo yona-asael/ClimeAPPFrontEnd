@@ -21,7 +21,7 @@
         <div class="row">
           <div class="col-12">
             <ng-container *ngIf="!readOnly && !isAppointUpdate; else elseBlock">
-              <app-create></app-create>
+              <app-create [patients]="patients" [medics]="medics" ></app-create>
             </ng-container>
             <ng-template #elseBlock> </ng-template>
           </div>

@@ -6,6 +6,7 @@ import { PersonResolver } from '../../core/resolvers/Personal.resolver';
 import { MedicEditComponent } from './services-tabs/medic-edit/medic-edit.component';
 import { PersonsResolver } from '../../core/resolvers/Persons.resolver';
 import { MedicResolver } from '../../core/resolvers/Medic.resolver';
+import {UserResolver} from 'app/core/resolvers/User.resolver';
 
 
 const routes: Routes = [
@@ -26,7 +27,7 @@ const routes: Routes = [
       {
         path: 'personal/create',
         component: PersonalEditComponent,
-        resolve: { person: PersonResolver },
+        resolve: { person: PersonResolver, user: UserResolver },
         data: {
           title: 'Crear',
           readOnly: false,
@@ -36,7 +37,7 @@ const routes: Routes = [
       {
         path: 'personal/edit/:id',
         component: PersonalEditComponent,
-        resolve: { person: PersonResolver },
+        resolve: { person: PersonResolver, user: UserResolver },
         data: {
           title: 'Edit',
           readOnly: false,
@@ -46,7 +47,7 @@ const routes: Routes = [
       {
         path: 'personal/see/:id',
         component: PersonalEditComponent,
-        resolve: { person: PersonResolver },
+        resolve: { person: PersonResolver, user: UserResolver },
         data: {
           title: 'Crear',
           readOnly: true,

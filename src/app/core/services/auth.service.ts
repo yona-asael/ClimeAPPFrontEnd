@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { UserModel } from '../models/user.model';
+import {IUser} from '../interface/User.interface';
 
 
 @Injectable({
@@ -28,8 +29,21 @@ export class AuthService {
       retry(1),
       catchError(this.handleError)
     );
+  }
+
+  public register(user: IUser): Observable<UserModel> {
+    return this.http.post<UserModel>(this.API + `/register`, user, this.httpOptions).pipe(
+        catchError(this.handleError)
+    );
+  }
+
+  public update(user: UserModel, id: string): Observable<UserModel> {
+     return this.http.put<UserModel>(this.API + `/${id}`, user, this.httpOptions).pipe(
+        catchError(this.handleError)
+    );
 
   }
+
   public singIn(user: UserModel): Observable<UserModel> {
     return this.http.post<UserModel>(this.API + '/register', user, this.httpOptions).pipe(
       retry(1),
@@ -37,9 +51,15 @@ export class AuthService {
     );
   }
 
-  public profile(user: UserModel): Observable<UserModel> {
+  public profile(): Observable<UserModel> {
     return this.http.get<UserModel>(this.API + '/profile', this.httpOptions).pipe(
       catchError(this.handleError)
+    );
+  }
+
+  public verifyUser(id: string): Observable<UserModel> {
+    return this.http.get<UserModel>(this.API + `/${id}`, this.httpOptions).pipe(
+        catchError(this.handleError)
     );
   }
 

@@ -11,6 +11,7 @@ import {PatientService} from 'app/core/services/patient.service';
 import { UserListComponent } from './user-create/user-list/user-list.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
     MaterialModule,
     MatDialogModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule,
   ],
   providers: [
     PatientResolver,

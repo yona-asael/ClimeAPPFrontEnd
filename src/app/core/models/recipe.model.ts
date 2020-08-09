@@ -1,11 +1,12 @@
 export class RecipeModel {
     public date: Date;
-    public dignostic: String;
-    public TA: String;
-    public FC: String;
-    public FR: String;
-    public T: String;
+    public dignostic: string;
+    public TA: string;
+    public FC: string;
+    public FR: string;
+    public T: string;
     public dateExp: Date;
+    public status: boolean;
 }
 
 
