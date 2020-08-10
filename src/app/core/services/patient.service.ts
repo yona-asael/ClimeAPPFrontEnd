@@ -65,7 +65,22 @@ export class PatientService {
     );
   }
 
-  handleError(error) {
+  public getHistoryList(id: string, limit: Number, page: Number): Observable<PaginationModel> {
+    const params = { ... this.httpOptions }
+    params.params = new HttpParams().set('limit', `${limit}`).set('page', `${page}`);
+    return this.http.get<PaginationModel>(this.API + `/${id}/history`, params).pipe(
+      retry(1),
+      catchError(this.handleError),
+    );
+  }
+
+ public addHistory(id: string, appointid: string): Observable<PatientModel> {
+    return this.http.post<PatientModel>(this.API + `/${id}/history`, JSON.stringify({id: appointid}), this.httpOptions).pipe(
+      catchError(this.handleError),
+    );
+  }
+
+  handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       errorMessage = `Error: ${error.error.message}`;

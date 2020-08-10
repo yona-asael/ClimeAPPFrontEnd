@@ -17,7 +17,7 @@
               </div>
               <div class="col-2"> 
                 <div *ngIf="!readOnly && isAppointUpdate">
-                  <button mat-raised-button color="primary">Finalizar Consulta</button>
+                  <button mat-raised-button color="primary" (click)="saveChanges()">Finalizar Consulta</button>
                 </div>
               </div>
           </div>
@@ -87,7 +87,7 @@
                     #autosize="cdkTextareaAutosize"
                     cdkAutosizeMinRows="1"
                     cdkAutosizeMaxRows="100">
-                    required></textarea>
+                  </textarea>
                 <mat-hint align="start">Escriba el <strong>diagnostico</strong></mat-hint>
               </mat-form-field>
 

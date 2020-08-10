@@ -76,7 +76,7 @@
                         <ng-container matColumnDef="FECHA">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
                             <td mat-cell *matCellDef="let element">
-                                {{element.date}}
+                                {{element.date | date}}
                             </td>
                         </ng-container>
                         <ng-container matColumnDef="ACTIONS">

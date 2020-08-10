@@ -15,6 +15,7 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
 import { RecipeService } from '../../core/services/recipe.service';
 import { RecipeResolver } from '../../core/resolvers/Recipe.resolver';
+import {PatientService} from 'app/core/services/patient.service';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { RecipeResolver } from '../../core/resolvers/Recipe.resolver';
   providers: [
     AppointService,
     RecipeService,
+    PatientService,
     MedicsResolver,
     PatientsResolver,
     AppointResolver,

@@ -5,6 +5,7 @@ import {AppointModel} from "./appoint.model";
 
 export class PaginationModel {
   data: AppointModel[] | PatientModel[] | MedicModel[] | PersonModel[] | null;
+  history: PatientModel;
   pagination: Pagination;
 }
 

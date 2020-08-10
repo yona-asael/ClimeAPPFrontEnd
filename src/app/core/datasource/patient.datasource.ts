@@ -15,7 +15,7 @@ export default class PatientDataSource extends BaseDataSource {
             .pipe(
                 tap(res => {
                     this.entitySubject.next(res.data);
-                    this.paginatorTotalSubject.next(Number(res.pagination.totalPages) * Number(res.pagination.totalPages));
+                    this.paginatorTotalSubject.next(Number(res.pagination.perPage) * Number(res.pagination.totalPages));
                 }),
                 catchError(err => of('error')),
                 finalize(() => this.loadingSubject.next(false))

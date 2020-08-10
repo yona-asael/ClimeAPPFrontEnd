@@ -2,15 +2,17 @@ import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {PatientModel} from 'app/core/models/patient.model';
-import {MedicModel} from 'app/core/models/medic.model';
-import {AppointModel} from 'app/core/models/appoint.model';
-import { Subject } from 'rxjs';
-import { RecipeService } from 'app/core/services/recipe.service';
+import {PatientModel} from '../../../core/models/patient.model';
+import {MedicModel} from '../../../core/models/medic.model';
+import {AppointModel} from '../../../core/models/appoint.model';
+import { Subject } from 'rxjs'
+import { RecipeService } from '../../../core/services/recipe.service';
 import { take, takeUntil } from 'rxjs/operators';
-import { RecipeModel } from 'app/core/models/recipe.model';
-import { IRecipe } from 'app/core/interface/Recipe.interface';
+import { RecipeModel } from '../../../core/models/recipe.model';
+import { IRecipe } from '../../../core/interface/Recipe.interface';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import {AppointService} from '../../../core/services/appoint.service';
+import {PatientService} from 'app/core/services/patient.service';
 
 @Component({
   selector: 'app-appointment-edit',
@@ -23,14 +25,17 @@ export class AppointmentEditComponent implements OnInit {
     public isAppointUpdate: boolean;
     public patients: PatientModel[];
     public medics: MedicModel[];
-    public appint: AppointModel;
+    public appoint: AppointModel;
     private recipe: RecipeModel;
     public recipeForm: FormGroup;
+    private add: boolean;
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
     constructor(
     private activatedRoute: ActivatedRoute,
     private recipeService: RecipeService,
+    private appoinService: AppointService,
+    private patientService: PatientService,
     private _snackBar: MatSnackBar,
     private inputFB: FormBuilder,
     private router: Router,
@@ -40,9 +45,10 @@ export class AppointmentEditComponent implements OnInit {
   ngOnInit(): void {
     this.readOnly = this.activatedRoute.snapshot.data['readOnly'];
     this.isAppointUpdate = this.activatedRoute.snapshot.data['update'];
+    this.add = this.activatedRoute.snapshot.data['add'];
     const appointModel: AppointModel = <AppointModel>this.activatedRoute.snapshot.data['appoint'];
     if (appointModel) {
-     this.appint = appointModel;
+     this.appoint = appointModel;
     }
     const recipeModel: RecipeModel = <RecipeModel>this.activatedRoute.snapshot.data['recipe'];
     if (recipeModel) {
@@ -77,41 +83,58 @@ export class AppointmentEditComponent implements OnInit {
 
   saveChanges(): void {
     if (this.isAppointUpdate) {
-      this.updateMedic();
+      this.updatedRecipes();
     } else {
-      this.addMedic();
+      this.addRecipe();
     }
   }
 
-  addMedic(): void {
+  addRecipe(): void {
     this.recipeService.create(this.getRecipe).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
-    this._snackBar.open('Registrado Medico ', 'Cerrar', {
-      duration: 2000,
-    });
+        //this.appoinService.update().subscribe(res=>{
+            this._snackBar.open('Registrado Medico ', 'Cerrar', {
+                duration: 2000,
+            });
+       // });
     this.router.navigate(['/appointmet']);
     });
   }
 
-  updateMedic() {
+  updatedRecipes() {
     this.recipeService.create(this.getRecipe).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
-      this._snackBar.open('Medico Actualizado', 'Cerrar', {
-        duration: 2000,
-      });
-      this.router.navigate(['/appointmet']);
+    this.appoint.status = true;
+    this.appoint.recipe = res._id;
+       this.appoinService.update(this.appoint).subscribe(response => {
+            this._snackBar.open('Consulta finalizada ', 'Cerrar', {
+                duration: 2000,
+            });
+            if(this.add){
+                let id: string;
+                if ( this.appoint.patient instanceof String) {
+                   id = <string>this.appoint.patient;
+                } else {
+                    id = (<PatientModel>this.appoint.patient)._id;
+                }
+                this.patientService.addHistory(id, this.appoint._id).subscribe(() => {
+                });
+            }
+            this.router.navigate(['/appointment']);
+        });
     });
   }
 
   get getRecipe() {
     const provControl = this.recipeForm.controls;
     const recipe: IRecipe  = {
-      dignostic: provControl.diagnostic.value,
+      dignostic: provControl.dignostic.value,
       date: Date.now().toString(),
       dateExp: provControl.dateExp.value,
       FC: provControl.FC.value,
       FR: provControl.FR.value,
       T: provControl.T.value,
       TA: provControl.TA.value,
-      status: true,
+      status: false,
+      //modificar el appointmen status
     };
     return recipe;
   }

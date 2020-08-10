@@ -48,6 +48,7 @@ const routes: Routes = [
           title: 'Edit',
           readOnly: false,
           update: true,
+          add: true,
         },
       },
     ],

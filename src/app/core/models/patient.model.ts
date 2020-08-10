@@ -9,7 +9,7 @@ export class PatientModel {
     public address: string;
     public cellphone: number;
     public SEX: string;
-    public history: AppointModel;
+    public history: AppointModel[];
 }
 
 
