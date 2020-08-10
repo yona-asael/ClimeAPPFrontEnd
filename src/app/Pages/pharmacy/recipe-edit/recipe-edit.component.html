@@ -1,1 +1,100 @@
-<p>recipe-edit works!</p>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <div id="typography">
+                    <div class="card-title">
+                        <div class="row">
+                            <div class="col-9">
+                                <h2>Agregar Farmacia</h2>
+                            </div>
+                            <div class="col-1">
+                                <a [routerLink]="['/services']" mat-raised-button class="mat-icon-inline">
+                                    <mat-icon>arrow_back</mat-icon>
+                                    Regresar
+                                </a>
+                            </div>
+                            <div class="col-2">
+                                <button mat-raised-button color="primary" *ngIf="!readOnly" (click)="saveChanges()">
+                                    <mat-icon>save</mat-icon>
+                                    Guardar Cambios
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form [formGroup]="recipeForm">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input formControlName="date" matInput placeholder="Escriba la fecha" required>
+                                <mat-hint align="start">Escriba <strong>La fecha</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-3">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input matInput formControlName="dignostic" placeholder="Escriba el dignostico"
+                                    required>
+                                <mat-hint align="start">Escriba el <strong>dignostico</strong>
+                                </mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-3">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input matInput formControlName="TA" placeholder="Escriba TA"
+                                    required>
+                                <mat-hint align="start">Escriba <strong>TA</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-3">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input matInput formControlName="FC" placeholder="Escriba FC"
+                                    required>
+                                <mat-hint align="start">Escriba <strong>FC</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input matInput formControlName="FR" placeholder="Escriba FR"
+                                    required>
+                                <mat-hint align="start">Escriba <strong>FR</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input matInput formControlName="T" placeholder="Escriba T"
+                                    required>
+                                <mat-hint align="start">Escriba <strong>T</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-3">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input matInput formControlName="dateExp" placeholder="Escriba la fecha de expiracion"
+                                    required>
+                                <mat-hint align="start">Escriba <strong> la fecha de expiracion</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-3">
+                            <mat-form-field class="mat-form-field-fluid">
+                                <input matInput formControlName="status" placeholder="Escriba el estatus"
+                                    required>
+                                <mat-hint align="start">Escriba <strong>Estatus</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+
+
+                        
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+recipeForm

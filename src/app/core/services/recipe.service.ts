@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { PaginationModel } from '../models/pagination.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,16 @@ export class RecipeService {
       catchError(this.handleError),
     );
   }
+  
+  public getList(limit: Number, page: Number): Observable<PaginationModel> {
+    const params = { ... this.httpOptions }
+    params.params = new HttpParams().set('limit', `${limit}`).set('page', `${page}`);
+    return this.http.get<PaginationModel>(this.API + '/', params).pipe(
+      retry(1),
+      catchError(this.handleError),
+    );
+  }
+
 
   public create(user: any): Observable<any> {
     return this.http.post<any>(this.API, JSON.stringify(user), this.httpOptions).pipe(
@@ -46,7 +57,7 @@ export class RecipeService {
     );
   }
 
-  public delete(id: number): Observable<boolean> {
+  public delete(id: string): Observable<boolean> {
     return this.http.delete<boolean>(this.API + `/${id}`, this.httpOptions).pipe(
       catchError(this.handleError)
     );
