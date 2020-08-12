@@ -4,7 +4,7 @@ import { BaseDataSource } from './base.datasource';
 // import { DataSourceModel } from '../models/datasource.model';
 import { RecipeService  } from '../services/recipe.service';
 
-export default class PatientDataSource extends BaseDataSource {
+export default class RecipeDataSource extends BaseDataSource {
 
     constructor(private recipeService: RecipeService) {
         super();

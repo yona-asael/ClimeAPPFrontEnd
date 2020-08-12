@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Subject, merge } from 'rxjs';
-import PatientDataSource from '../../../../app/core/datasource/recipe.datasource';
+import RecipeDataSource from '../../../../app/core/datasource/recipe.datasource';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { RecipeService } from '../../../../app/core/services/recipe.service';
@@ -22,7 +22,7 @@ export class RecipeListComponent implements OnInit {
 
   private ngUnsubscribe = new Subject();
   baseRoute = '/services';
-  DataSource: PatientDataSource;
+  DataSource: RecipeDataSource;
   dataSource_loaded = false;
   displayedColumns: String[] = ['ID', 'FECHA',  'ESTATUS', 'ACTIONS'];
 
@@ -37,7 +37,7 @@ export class RecipeListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.DataSource = new PatientDataSource(this.recipeService);
+    this.DataSource = new RecipeDataSource(this.recipeService);
  
   }
 
@@ -58,7 +58,7 @@ export class RecipeListComponent implements OnInit {
         takeUntil(this.ngUnsubscribe)
       ).subscribe();
 
-    this.DataSource = new PatientDataSource(this.recipeService);
+    this.DataSource = new RecipeDataSource(this.recipeService);
 
     this.DataSource.connect().pipe(take(2)).subscribe((value) => {
       this.dataSource_loaded = !!value;
