@@ -8,6 +8,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
+import {MaterialModule} from 'app/material.module';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [RecipeListComponent, RecipeEditComponent],
@@ -18,6 +20,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatDatepickerModule,
     MatIconModule,
+    MaterialModule,
+    SharedModule,
   ]
 })
 export class PharmacyModule { }

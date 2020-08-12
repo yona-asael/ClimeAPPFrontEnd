@@ -5,6 +5,7 @@ import { throwError, Observable } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { UserModel } from '../models/user.model';
 import {IUser} from '../interface/User.interface';
+import {TokenStorage} from './token-storage.service';
 
 
 @Injectable({
@@ -21,14 +22,15 @@ export class AuthService {
   };
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private tokenStorage: TokenStorage, 
   ) { }
 
   public signUp(user: UserModel): Observable<UserModel> {
     return this.http.post<UserModel>(this.API + `/login`, user, this.httpOptions).pipe(
       retry(1),
       catchError(this.handleError)
-    );
+    )
   }
 
   public register(user: IUser): Observable<UserModel> {
@@ -62,6 +64,11 @@ export class AuthService {
         catchError(this.handleError)
     );
   }
+
+
+ public validatetoken(): boolean {
+    return !!this.tokenStorage.getAccessToken();
+ }
 
   handleError(error) {
     let errorMessage = '';

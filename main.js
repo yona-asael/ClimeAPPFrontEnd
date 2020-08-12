@@ -12,6 +12,9 @@ const {app, BrowserWindow} = require('electron')
           nodeIntegration: true
         }
       })
+    
+      
+      mainWindow.setMenu(null)
 
       mainWindow.loadURL(
         url.format({
@@ -21,13 +24,11 @@ const {app, BrowserWindow} = require('electron')
         })
       );
       // Open the DevTools.
-      mainWindow.webContents.openDevTools()
 
       mainWindow.on('closed', function () {
         mainWindow = null
       })
     }
-
     app.on('ready', createWindow)
 
     app.on('window-all-closed', function () {

@@ -22,7 +22,7 @@ export class UserListComponent implements OnInit {
   baseRoute = '/user/create';
   DataSource: HistoryDataSource; 
   dataSource_loaded = false;
-  displayedColumns: String[] = ['FOLIO', 'MEDIC', 'DATE', 'ACTIONS'];
+  displayedColumns: String[] = ['FOLIO', 'FOLIOP','MEDIC', 'DATE' ];
   
   @Input() patient: PatientModel;
 

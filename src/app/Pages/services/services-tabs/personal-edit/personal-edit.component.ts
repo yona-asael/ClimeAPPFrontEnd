@@ -62,7 +62,7 @@ export class PersonalEditComponent implements OnInit, OnDestroy {
       address: [{ value: this.person.address, disabled: this.readOnly }, [Validators.required]],
       cellphone: [{ value: this.person.cellphone, disabled: this.readOnly }, [Validators.required, Validators.pattern('^[0-9]*$')]],
       job: [{ value: this.person.job, disabled: this.readOnly }, [Validators.required]],
-      rol: [{ valie: this.person.rol, disabled: this.readOnly}],
+      rol: [{ value: this.person.rol, disabled: this.readOnly}],
     });
   }
 

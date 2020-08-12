@@ -46,15 +46,19 @@ export class MedicEditComponent implements OnInit, OnDestroy {
   }
 
   createForm() {
-      let person: PersonModel = new PersonModel();
-     if(person.name === ''){
-        person = <PersonModel>this.medic.person
-     }
+      let persons: PersonModel = new PersonModel();
+        persons = <PersonModel>this.medic.person;
+      if(this.readOnly === false && this.isMedicUpdated === false){  
+          persons = new PersonModel();
+          persons.name = '';
+          persons.lastname = '';
+      } 
+      let value = persons.name  + persons.lastname
      this.medicForm = this.inputFB.group({
       cedP: [{ value: this.medic.cedP, disabled: this.readOnly }, [Validators.required]],
       grade: [{ value: this.medic.grade, disabled: this.readOnly }, [Validators.required]],
       university: [{ value: this.medic.university, disabled: this.readOnly }, [Validators.required]],
-      person: [{ value: person.name, disabled: this.readOnly }, [Validators.required]],
+      person: [{ value: value, disabled: this.readOnly }, [Validators.required]],
     });
   
   }
@@ -102,7 +106,7 @@ export class MedicEditComponent implements OnInit, OnDestroy {
     this.medic.cedP = provControl.cedP.value;
     this.medic.grade = provControl.grade.value;
     this.medic.university = provControl.university.value;
-    this.medic.person = provControl.person.value._id;
+    this.medic.person = provControl.person.value._id === undefined ? (<PersonModel>this.medic.person)._id : provControl.person.value._id;
     return this.medic;
   }
 

@@ -29,8 +29,8 @@
   <mat-step [stepControl]="medicForm">
     <form [formGroup]="medicForm">
      <mat-form-field class="mat-form-field-fluid">
-        <ng-template matStepLabel>Selecciona el paciente</ng-template>
-        <mat-label>Paciente</mat-label>
+        <ng-template matStepLabel>Selecciona el medico</ng-template>
+        <mat-label>Medico</mat-label>
        <input matInput [matAutocomplete]="medicSelect" formControlName="secondCtrl"
        placeholder="Escriba el medico "  required>
       <mat-autocomplete #medicSelect="matAutocomplete">
@@ -42,7 +42,7 @@
             </mat-option>
           </ng-container>
      </mat-autocomplete>
-     <mat-hint align="start">Seleccione la <strong>Paciente</strong></mat-hint>
+     <mat-hint align="start">Seleccione la <strong>medico</strong></mat-hint>
     </mat-form-field>
 
 

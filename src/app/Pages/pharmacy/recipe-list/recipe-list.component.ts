@@ -8,12 +8,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { takeUntil, tap, take } from 'rxjs/operators';
 import { DeleteDialogComponent } from '../../shared/dialogs/delete-dialog/delete-dialog.component';
+import {RecipeModel} from 'app/core/models/recipe.model';
+import {RecipeDialogComponent} from 'app/Pages/shared/dialogs/recipe-dialog/recipe-dialog.component';
 
 
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
-  styleUrls: ['./recipe-list.component.css']
+  styleUrls: ['./recipe-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RecipeListComponent implements OnInit {
 
@@ -21,7 +24,7 @@ export class RecipeListComponent implements OnInit {
   baseRoute = '/services';
   DataSource: PatientDataSource;
   dataSource_loaded = false;
-  displayedColumns: String[] = ['ID', 'FECHA', 'DIAG', 'ESTATUS', 'ACTIONS'];
+  displayedColumns: String[] = ['ID', 'FECHA',  'ESTATUS', 'ACTIONS'];
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -67,13 +70,14 @@ export class RecipeListComponent implements OnInit {
   }
 
 
-  deleteClient(id: string) {
-    const dialogRef = this.dialog.open(DeleteDialogComponent);
+  deleteClient(recipe ) {
+    recipe.status = true;
+    const dialogRef = this.dialog.open(RecipeDialogComponent);
     dialogRef.afterClosed().pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
       if (result) {
-        this.recipeService.delete(id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
+        this.recipeService.update(recipe).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
           if (res) {
-            this._snackBar.open('Farmacia Eliminado', 'Cerrar', {
+            this._snackBar.open('Receta surtida', 'Cerrar', {
               duration: 2000,
             });
           }

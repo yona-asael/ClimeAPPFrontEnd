@@ -20,6 +20,9 @@ import { PersonService } from './core/services/person.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MedicService } from './core/services/medic.service';
 import { LoginComponent } from './Pages/login/login.component';
+import {AuthService} from './core/services/auth.service';
+import {TokenStorage} from './core/services/token-storage.service';
+import {MaterialModule} from './material.module';
 
 @NgModule({
   imports: [
@@ -31,6 +34,7 @@ import { LoginComponent } from './Pages/login/login.component';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    MaterialModule
   ],
   declarations: [
     AppComponent,
@@ -40,7 +44,9 @@ import { LoginComponent } from './Pages/login/login.component';
   ],
   providers: [
     PersonService,
-    MedicService
+    MedicService,
+    AuthService,
+    TokenStorage
   ],
   bootstrap: [AppComponent]
 })

@@ -39,32 +39,22 @@
                         <h4 class="climme">
                             CLIME
                         </h4>
-                        <h4 class="appp">
+                       <!-- <h4 class="appp">
                             APP
-                        </h4>
+                       </h4> -->
                     </div>
                 </div>
-                <form (ngSubmit)="onSubmit(frm)" #frm="ngForm">
+                <form [formGroup]="userForm"> 
                     <div class="form-group">
                         <label><i class="fa fa-envelope" aria-hidden="true"></i> Usuario</label>
-                        <input [(ngModel)]="login.strEmail" type="email" email class="form-control form-control-sm" name="strEmail" placeholder="Usuario" required>
+                        <input formControlName="username"  type="text" class="form-control form-control-sm" placeholder="Usuario" required>
                     </div>
                     <div class="form-group">
                         <label><i class="fa fa-lock" aria-hidden="true"></i> Contraseña</label>
-                        <input [(ngModel)]="login.strPassword" type="password" class="form-control form-control-sm" name="strPassword" placeholder="Contraseña" required>
+                        <input formControlName="password" type="password" class="form-control form-control-sm" name="strPassword" placeholder="Contraseña" required>
                     </div>
-                    <div class="form-group d-flex justify-content-between align-items-center">
-                        <div class="custom-control custom-checkbox">
-                            <input [(ngModel)]="recordarme" name="remember-me" type="checkbox" class="custom-control-input" id="rememberMe">
-                            <label class="custom-control-label" for="rememberMe">Recuérdame</label>
-                        </div>
-                         <!--<a [routerLink]="['/recuperarContra',0]" class="text-muted ml-1"><b>¿Olvidaste tu contraseña?</b></a> -->
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-sign-in" aria-hidden="true"></i> Iniciar Sesión</button>
-                    <div class="form-group d-flex justify-content-between align-items-center">
-                        <a [routerLink]="['/recuperarContra',0]" class="text-muted ml-1 mt-4">¿Olvidaste tu contraseña?</a>
-                    </div>
-                </form>
+                     <button (click)="login()" class="btn btn-primary btn-block"><i class="fa fa-sign-in" aria-hidden="true"></i> Iniciar Sesión</button>
+                  </form>
             </div>
         </div>
     </div>

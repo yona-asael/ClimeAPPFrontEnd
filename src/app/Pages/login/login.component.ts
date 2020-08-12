@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { UserModel } from '../../../app/core/models/user.model';
 import { AuthService } from '../../../app/core/services/auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {TokenStorage} from 'app/core/services/token-storage.service';
 
 //import Swal from 'sweetalert2';
 
@@ -16,9 +18,14 @@ export class LoginComponent implements OnInit {
 
   usuario: UserModel = new UserModel();
   recordarme = false; 
-
-  constructor( private auth: AuthService,
-               private router: Router ) { }
+  public userForm: FormGroup;
+  constructor( 
+    private auth: AuthService,
+    private router: Router,
+    private inputFB: FormBuilder,
+    private _snackBar: MatSnackBar,
+    private tokenStorage: TokenStorage,
+  ) { }
 
   ngOnInit() {
 
@@ -26,39 +33,38 @@ export class LoginComponent implements OnInit {
       this.usuario.username = localStorage.getItem('username');
       this.recordarme = true;
     }
-
+    this.createForm();
   }
 
 
-  login( form: NgForm ) {
-
+  createForm() {
+    this.userForm = this.inputFB.group({
+        username: ['', [Validators.required]],
+        password: ['',[Validators.required]],
+    });
+  }
+  
+  login( ) {
+    const form = this.userForm.controls;
+    
     if (  form.invalid ) { return; }
-
-    //Swal.fire({
-     // allowOutsideClick: false,
-     // type: 'info',
-      //text: 'Espere por favor...'
-    //});
-  //  Swal.showLoading();
-
-
+    this.usuario.username = form.username.value;
+    this.usuario.password = form.password.value;    
     this.auth.signUp( this.usuario )
       .subscribe( resp => {
-        console.log(resp);
-        //Swal.close();
-        if ( this.recordarme ) {
-          localStorage.setItem('username', this.usuario.username);
-        }
-        this.router.navigateByUrl('/home');
+          this._snackBar.open('Ingreso Exitoso', 'Cerrar', {
+                duration: 2000,
+            }); 
+       // if ( this.recordarme ) {
+        //  localStorage.setItem('username', this.usuario.username);
+        //}
+        this.tokenStorage.setItems('loged', true);
+        this.router.navigateByUrl('/appointment');
 
       }, (err) => {
-
-        console.log(err.error.error.message);
-        ///Swal.fire({
-          //type: 'error',
-          //title: 'Error al autenticar',
-          //text: err.error.error.message
-      //  });
+          this._snackBar.open('Tuvol un error elIngreso', 'Cerrar', {
+                duration: 2000,
+            }); 
       });
   }
 

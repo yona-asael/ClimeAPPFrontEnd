@@ -48,7 +48,7 @@ export class PersonalListComponent implements OnInit, AfterViewInit, OnDestroy {
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
         tap(() => {
-          this.loadProviderList();
+            this.loadProviderList();
         }),
         takeUntil(this.ngUnsubscribe)
       ).subscribe();
@@ -61,7 +61,8 @@ export class PersonalListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadProviderList(): void {
-    this.DataSource.loadPersons(this.paginator.pageSize, this.paginator.pageIndex);
+      console.log(this.sort);
+      this.DataSource.loadPersons(this.paginator.pageSize, this.paginator.pageIndex);
   }
 
 

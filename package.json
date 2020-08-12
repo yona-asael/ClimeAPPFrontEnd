@@ -1,6 +1,6 @@
 {
-  "name": "material-dashboard-angular",
-  "version": "2.4.0",
+  "name": "clime",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "main.js",
   "scripts": {
@@ -64,6 +64,7 @@
     "@types/jquery": "3.3.29",
     "@types/node": "12.0.7",
     "codelyzer": "5.2.1",
+    "electron": "^9.2.0",
     "jasmine-core": "3.5.0",
     "jasmine-spec-reporter": "4.2.1",
     "karma": "4.4.1",

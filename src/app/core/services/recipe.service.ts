@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { PaginationModel } from '../models/pagination.model';
+import {RecipeModel} from '../models/recipe.model';
+import {IRecipe} from '../interface/Recipe.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -21,15 +23,15 @@ export class RecipeService {
     private http: HttpClient
   ) { }
 
-  public findOne(id: string): Observable<any> {
-    return this.http.get<any>(this.API + `/${id}`, this.httpOptions).pipe(
+  public findOne(id: string): Observable<RecipeModel> {
+    return this.http.get<RecipeModel>(this.API + `/${id}`, this.httpOptions).pipe(
       retry(1),
       catchError(this.handleError)
     );
 
   }
-  public getALL(): Observable<any[]> {
-    return this.http.get<any[]>(this.API + '/', this.httpOptions).pipe(
+  public getALL(): Observable<RecipeModel[]> {
+    return this.http.get<RecipeModel[]>(this.API + '/', this.httpOptions).pipe(
       retry(1),
       catchError(this.handleError),
     );
@@ -45,14 +47,14 @@ export class RecipeService {
   }
 
 
-  public create(user: any): Observable<any> {
-    return this.http.post<any>(this.API, JSON.stringify(user), this.httpOptions).pipe(
+  public create(user: IRecipe): Observable<RecipeModel> {
+    return this.http.post<RecipeModel>(this.API, JSON.stringify(user), this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
 
-  public update(user: any): Observable<any> {
-    return this.http.put<any>(this.API + `/${user.id}`, JSON.stringify(user), this.httpOptions).pipe(
+  public update(user: RecipeModel): Observable<RecipeModel> {
+    return this.http.put<RecipeModel>(this.API + `/${user._id}`, JSON.stringify(user), this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }

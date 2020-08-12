@@ -102,8 +102,8 @@ export class AppointmentEditComponent implements OnInit {
 
   updatedRecipes() {
     this.recipeService.create(this.getRecipe).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
-    this.appoint.status = true;
     this.appoint.recipe = res._id;
+    this.appoint.status = true;
        this.appoinService.update(this.appoint).subscribe(response => {
             this._snackBar.open('Consulta finalizada ', 'Cerrar', {
                 duration: 2000,
@@ -133,7 +133,7 @@ export class AppointmentEditComponent implements OnInit {
       FR: provControl.FR.value,
       T: provControl.T.value,
       TA: provControl.TA.value,
-      status: false,
+      status: false, 
       //modificar el appointmen status
     };
     return recipe;
