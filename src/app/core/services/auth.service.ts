@@ -17,7 +17,8 @@ export class AuthService {
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-    }),
+    }
+    ),
     params: new HttpParams(),
   };
 
@@ -26,21 +27,25 @@ export class AuthService {
     private tokenStorage: TokenStorage, 
   ) { }
 
-  public signUp(user: UserModel): Observable<UserModel> {
+  public signUp(user: UserModel): any {
     return this.http.post<UserModel>(this.API + `/login`, user, this.httpOptions).pipe(
       retry(1),
       catchError(this.handleError)
     )
   }
 
-  public register(user: IUser): Observable<UserModel> {
-    return this.http.post<UserModel>(this.API + `/register`, user, this.httpOptions).pipe(
+  public register(user: IUser): any {
+    let options =  this.httpOptions;
+     options.headers.set('Auth-Token', this.tokenStorage.getAccessToken().replace(/['"]+/g, ''));
+    return this.http.post(this.API + `/register`, user, options).pipe(
         catchError(this.handleError)
     );
   }
 
   public update(user: UserModel, id: string): Observable<UserModel> {
-     return this.http.put<UserModel>(this.API + `/${id}`, user, this.httpOptions).pipe(
+     let options =  this.httpOptions;
+     options.headers.set('Auth-Token', this.tokenStorage.getAccessToken().replace(/['"]+/g, ''));
+     return this.http.put<UserModel>(this.API + `/${id}`, user, options).pipe(
         catchError(this.handleError)
     );
 

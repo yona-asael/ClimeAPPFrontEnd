@@ -42,6 +42,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
         MatNativeDateModule,        
         MatStepperModule,
         MatTooltipModule,
+        MatSortModule,
     ],
     exports: [
         MatButtonModule,
@@ -64,6 +65,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
         MatNativeDateModule,
         MatStepperModule,
         MatTooltipModule,
+        MatSortModule,
     ]
 })
 export class MaterialModule { }

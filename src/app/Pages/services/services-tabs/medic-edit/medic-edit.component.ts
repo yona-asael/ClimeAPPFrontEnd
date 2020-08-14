@@ -55,7 +55,7 @@ export class MedicEditComponent implements OnInit, OnDestroy {
       } 
       let value = persons.name  + persons.lastname
      this.medicForm = this.inputFB.group({
-      cedP: [{ value: this.medic.cedP, disabled: this.readOnly }, [Validators.required]],
+      cedP: [{ value: this.medic.cedp, disabled: this.readOnly }, [Validators.required, Validators.pattern("^[0-9]*$"), ]],
       grade: [{ value: this.medic.grade, disabled: this.readOnly }, [Validators.required]],
       university: [{ value: this.medic.university, disabled: this.readOnly }, [Validators.required]],
       person: [{ value: value, disabled: this.readOnly }, [Validators.required]],
@@ -72,6 +72,7 @@ export class MedicEditComponent implements OnInit, OnDestroy {
   }
 
   addMedic(): void {
+      console.log(this.getMedic)
     this.medicService.create(this.getMedic).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
     this._snackBar.open('Registrado Medico ', 'Cerrar', {
       duration: 2000,
@@ -93,8 +94,9 @@ export class MedicEditComponent implements OnInit, OnDestroy {
 
   get getMedic() {
     const provControl = this.medicForm.controls;
+    console.log(provControl.cedP.value);
     const Medic: IMedic = {
-      cedP: provControl.cedP.value,
+      cedp: provControl.cedP.value,
       grade: provControl.grade.value,
       person: provControl.person.value,
       university: provControl.university.value,
@@ -103,7 +105,7 @@ export class MedicEditComponent implements OnInit, OnDestroy {
   }
   get updatedMedic(): MedicModel {
     const provControl = this.medicForm.controls;
-    this.medic.cedP = provControl.cedP.value;
+    this.medic.cedp = provControl.cedP.value;
     this.medic.grade = provControl.grade.value;
     this.medic.university = provControl.university.value;
     this.medic.person = provControl.person.value._id === undefined ? (<PersonModel>this.medic.person)._id : provControl.person.value._id;

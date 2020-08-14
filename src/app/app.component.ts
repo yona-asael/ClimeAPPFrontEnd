@@ -30,11 +30,13 @@ export class AppComponent {
 
     @HostListener('window:unload', [ '$event' ])
     unloadHandler(event) {
+        this.tokenStorage.clearToken();
         this.tokenStorage.clearItem('loged');
     }
 
     @HostListener('window:beforeunload', [ '$event' ])
     beforeUnloadHandler(event) {
+        this.tokenStorage.clearToken();
        this.tokenStorage.clearItem('loged'); 
     }
  }

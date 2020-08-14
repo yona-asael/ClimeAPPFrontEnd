@@ -6,6 +6,7 @@ import { retry, catchError } from 'rxjs/operators';
 import { PaginationModel } from '../models/pagination.model';
 import {RecipeModel} from '../models/recipe.model';
 import {IRecipe} from '../interface/Recipe.interface';
+import {TokenStorage} from './token-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +15,15 @@ export class RecipeService {
   private API = environment.API_ENDPOINT + 'recipes';
   private httpOptions = {
     headers: new HttpHeaders({
+      'Auth-Token': this.tokenStorage.getAccessToken().replace(/['"]+/g, ''),
       'Content-Type': 'application/json',
     }),
     params: new HttpParams(),
   };
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private tokenStorage: TokenStorage
   ) { }
 
   public findOne(id: string): Observable<RecipeModel> {

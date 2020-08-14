@@ -61,7 +61,6 @@ export class PersonalListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadProviderList(): void {
-      console.log(this.sort);
       this.DataSource.loadPersons(this.paginator.pageSize, this.paginator.pageIndex);
   }
 

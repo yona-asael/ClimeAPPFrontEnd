@@ -6,6 +6,7 @@ import { retry, catchError } from 'rxjs/operators';
 import { PaginationModel }  from '../models/pagination.model';
 import {PatientModel} from '../models/patient.model';
 import {IPatient} from '../interface/Patient.interface';
+import {TokenStorage} from './token-storage.service';
 
 
 @Injectable({
@@ -15,13 +16,15 @@ export class PatientService {
   private API = environment.API_ENDPOINT + 'patients';
   private httpOptions = {
     headers: new HttpHeaders({
+      'Auth-Token': this.tokenStorage.getAccessToken().replace(/['"]+/g, ''),
       'Content-Type': 'application/json',
     }),
     params: new HttpParams(),
   };
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private tokenStorage: TokenStorage
   ) { }
 
   public findOne(id: String): Observable<PatientModel> {

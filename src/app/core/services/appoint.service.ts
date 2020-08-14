@@ -6,6 +6,7 @@ import { retry, catchError } from 'rxjs/operators';
 import { PaginationModel } from '../models/pagination.model';
 import {AppointModel} from '../models/appoint.model';
 import {IAppoint} from '../interface/Appoint.interface';
+import {TokenStorage} from './token-storage.service';
 
 
 @Injectable({
@@ -16,13 +17,15 @@ export class AppointService {
     private API = environment.API_ENDPOINT + 'appoints';
     private httpOptions = {
     headers: new HttpHeaders({
+      'Auth-Token': this.tokenStorage.getAccessToken().replace(/['"]+/g, ''),
        'Content-Type': 'application/json',
     }),
     params: new HttpParams(),
   };
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private tokenStorage: TokenStorage   
   ) { }
 
   public findOne(id: string): Observable<AppointModel> {

@@ -1,6 +1,6 @@
 
 export interface IMedic {
-    cedP: String,
+    cedp: String,
     grade: String,
     university: String,
     person: String,

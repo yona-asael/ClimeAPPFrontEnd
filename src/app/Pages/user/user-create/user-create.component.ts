@@ -43,7 +43,7 @@ export class UserCreateComponent implements OnInit {
       name: [{ value: this.patient.name, disabled: this.readOnly }, [Validators.required]],
       address: [{ value: this.patient.address, disabled: this.readOnly }, [Validators.required]],
       lastname: [{ value: this.patient.lastname, disabled: this.readOnly }, [Validators.required]],
-      tel: [{ value: this.patient.cellphone, disabled: this.readOnly }, [Validators.required]],
+      tel: [{ value: this.patient.cellphone, disabled: this.readOnly }, [Validators.required, Validators.pattern("^[0-9]*$")]],
     });
   
   }

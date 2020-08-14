@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
     this.usuario.password = form.password.value;    
     this.auth.signUp( this.usuario )
       .subscribe( resp => {
+          this.tokenStorage.setAccessToken(resp.token);
           this._snackBar.open('Ingreso Exitoso', 'Cerrar', {
                 duration: 2000,
             }); 

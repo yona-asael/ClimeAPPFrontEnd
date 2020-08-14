@@ -6,6 +6,7 @@ import { retry, catchError } from 'rxjs/operators';
 import { MedicModel } from '../models/medic.model';
 import { IMedic } from '../interface/Medic.interface';
 import { PaginationModel } from '../models/pagination.model';
+import {TokenStorage} from './token-storage.service';
 
 
 @Injectable({
@@ -15,13 +16,15 @@ export class MedicService {
   private API = environment.API_ENDPOINT + 'medics';
   private httpOptions = {
     headers: new HttpHeaders({
+      'Auth-Token': this.tokenStorage.getAccessToken().replace(/['"]+/g, ''),
       'Content-Type': 'application/json',
     }),
     params: new HttpParams(),
   };
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private tokenStorage: TokenStorage
   ) { }
 
   public findOne(id: string): Observable<MedicModel> {

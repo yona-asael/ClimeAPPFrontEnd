@@ -10,6 +10,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import {MaterialModule} from 'app/material.module';
 import {SharedModule} from '../shared/shared.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [RecipeListComponent, RecipeEditComponent],
@@ -22,6 +23,8 @@ import {SharedModule} from '../shared/shared.module';
     MatIconModule,
     MaterialModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class PharmacyModule { }

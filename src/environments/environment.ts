@@ -5,7 +5,8 @@
 
 export const environment = {
   production: false,
-  API_ENDPOINT: 'http://localhost:3000/api/v1/',
+ // API_ENDPOINT: 'http://localhost:3000/api/v1/',
+ API_ENDPOINT: 'https://climeback.herokuapp.com/api/v1/',
   BASE_ROUTE: 'http://localhost/',
   HOSTNAME: 'localhost',
   BASE_URL: 'localhost:4200',

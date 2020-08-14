@@ -9,9 +9,9 @@ export default class PersonDataSource extends BaseDataSource {
     constructor(private personService: PersonService) {
         super();
     }
-    loadPersons(limit, page) {
+    loadPersons(limit, page ) {
         this.loadingSubject.next(true);
-        this.personService.getList(limit, page + 1)
+        this.personService.getList(limit, page + 1 )
             .pipe(
                 tap(res => {
                     this.entitySubject.next(res.data);

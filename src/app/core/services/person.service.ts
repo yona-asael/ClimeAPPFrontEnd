@@ -6,6 +6,7 @@ import { retry, catchError } from 'rxjs/operators';
 import { PersonModel } from '../models/person.model';
 import { IPerson } from '../interface/Person.iterface';
 import { PaginationModel } from '../models/pagination.model';
+import {TokenStorage} from './token-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +15,15 @@ export class PersonService {
   private API = environment.API_ENDPOINT + 'persons';
   private httpOptions = {
     headers: new HttpHeaders({
+      'Auth-Token': this.tokenStorage.getAccessToken().replace(/['"]+/g, ''),
       'Content-Type': 'application/json',
     }),
     params: new HttpParams(),
   };
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private tokenStorage: TokenStorage
   ) { }
 
   public findOne(id: String): Observable<PersonModel> {
@@ -39,7 +42,9 @@ export class PersonService {
 
   public getList(limit: Number, page: Number): Observable<PaginationModel> {
     const params = { ... this.httpOptions }
-    params.params = new HttpParams().set('limit', `${limit}`).set('page', `${page}`);
+    params.params = new HttpParams()
+    .set('limit', `${limit}`)
+    .set('page', `${page}`)
     return this.http.get<PaginationModel>(this.API + '/', params).pipe(
       retry(1),
       catchError(this.handleError),
